@@ -1,0 +1,129 @@
+*{
+    font-family: 'Rethink Sans', sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 600px;
+    background-color: #FFF5E0;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    background-color: #141E46;
+    width: 100%;
+    height: 60px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonContainer{
+    color: #FF6969;
+    font-family: 'Rethink Sans', sans-serif;
+    font-size: 20px;
+    
+}
+
+.buttonContainer ul{
+    list-style: none;
+    display: flex;
+    width: 300px;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+.buttonContainer ul li{
+    padding-left: 30px;
+    border: 1px;
+    border-color: azure;
+}
+
+.buttonContainer ul li button{
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #FFF5E0;
+}
+
+.logRegBtn:hover{
+    background-color: #FFF5E0;
+    color: #141E46;
+}
+
+.buttonContainer ul li a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/*logo*/
+
+.logoContainer{
+    color: #FFF5E0;
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+
+/*register*/
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerContainer{
+    
+    margin-top: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 700px;
+    height: 500px;
+    box-shadow: 0px 0px 17px 5px rgba(20,30,70,0.13);
+}
+
+.registerContainer form{
+    font-size: 19px;
+    display: grid;
+    row-gap: 25px;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+}
+.registerContainer form label{
+    width: 100%;
+}
+.registerContainer form input{
+    font-size: 16px;
+    background-color: transparent;
+    border-color: #141E46;
+    /* border: transparent; */
+    border-top: transparent;
+    border-right: transparent;
+    border-left: transparent;
+}
+
+.registerContainer form input:focus{
+    outline: none;
+}
+
+.registerContainer form button{
+    background-color: #141E46;
+    color: #FFF5E0;
+    font-family: 'Rethink Sans', sans-serif; 
+    box-shadow: 0px 0px 22px 5px rgba(20,30,70,0.35);
+    border-radius: 5px;
+    border: solid;
+    border-color: #141E46;
+    font-size: 16px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.registerContainer form button:hover{
+    background-color: transparent;
+    color: #141E46;
+}
