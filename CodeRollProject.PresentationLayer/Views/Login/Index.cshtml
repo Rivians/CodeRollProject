@@ -6,26 +6,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="main-content-w3layouts-agileits">
-	<div class="container">
-		<h3 class="tittle">Sign In Now</h3>
-		<div class="row inner-sec">
-			<div class="login p-5 bg-light mx-auto mw-100">
-				<form asp-action="Index" asp-controller="Login" method="post">
-					<div class="form-group">
-						<label for="exampleInputEmail1 mb-2">Email address</label>
-						<input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  required="">			
-						<span asp-validation-for="Email" style="color:red"></span>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1 mb-2">Password</label>
-						<input type="password" asp-for="Password" class="form-control" id="exampleInputPassword1"  required="">
-						<span asp-validation-for="Password" style="color:red"></span>
-					</div>
-					<button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
-					<p><a href="/Register/Index"> Don't have an account?</a></p>
-				</form>
-			</div>
-		</div>
-	</div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code & Roll</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="registerContainer">  
+            <form asp-action="Index" asp-controller="Login" method="post" >
+                <div class="mail">
+                    <label for="email">E-Mail</label>
+                    <br>
+                    <input type="email" asp-for="Email" id="email"  placeholder="Your E-Mail..">
+                    <span asp-validation-for="Email" style="color:red"></span>
+                </div>
+
+                <div class="sifre">
+                    <label for="pword">Password</label>
+                    <br>
+                    <input type="password" asp-for="Password" id="pword" placeholder="Your password..">
+                    <span asp-validation-for="Password" style="color:red"></span>
+                </div>
+                <button>Login</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
