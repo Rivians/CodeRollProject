@@ -1,8 +1,31 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h1>Dashboard Page</h1>
-
+<main>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">CREATE EVENT</div>
+            <div class="card-photo"><img src="https://img.freepik.com/premium-vector/business-meeting-office-conference-table-with-talking-businessmen-businesswomen_53562-4385.jpg" alt=""></div>
+            <div class="card-button">
+                <button class="button1"><a href="/CreateEvent/Index/" style="text-decoration:none">Create</a></button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-writing">
+                <p>Schedule an event for your team and make your colleagues mark availability.</p>
+            </div>
+            <div class="card-list">
+                <ul class="list">
+                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Choose the time you want.</li>
+                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 2</li>
+                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 3</li>
+                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 4</li>
+                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>

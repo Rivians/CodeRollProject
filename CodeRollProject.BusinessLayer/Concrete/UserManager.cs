@@ -35,7 +35,7 @@ namespace CodeRollProject.BusinessLayer.Concrete
 			return _userDal.GetListAll();
 		}
 
-		public List<User> GetListAll(Expression<Func<User, bool>> filter)  //  daha sonra kullanılacak. ****************************
+		public List<User> TGetListAll(Expression<Func<User, bool>> filter)  //  daha sonra kullanılacak. ****************************
 		{
 			throw new NotImplementedException();
 		}
@@ -45,7 +45,7 @@ namespace CodeRollProject.BusinessLayer.Concrete
 			_userDal.Insert(user);
 		}
 
-		public void Update(User user)
+		public void TUpdate(User user)
 		{
 			_userDal.Update(user);
 		}

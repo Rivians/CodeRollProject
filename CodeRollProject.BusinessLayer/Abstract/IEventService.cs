@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CodeRollProject.BusinessLayer.Abstract
 {
-	public interface IUserService : IGenericService<User>
-	{
-        
+    public interface IEventService : IGenericService<Event>
+    {
+
     }
 }

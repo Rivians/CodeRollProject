@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeRollProject.BusinessLayer.Abstract
+namespace CodeRollProject.DataAccessLayer.Abstract
 {
-	public interface IUserService : IGenericService<User>
-	{
-        
+    public interface IEventDal : IGenericDal<Event>
+    { 
     }
 }

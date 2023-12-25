@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CodeRollProject.BusinessLayer\CodeRollProject.BusinessLayer.csproj" />
     <ProjectReference Include="..\CodeRollProject.DataAccessLayer\CodeRollProject.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\CodeRollProject.DtoLayer\CodeRollProject.DtoLayer.csproj" />
     <ProjectReference Include="..\CodeRollProject.EntityLayer\CodeRollProject.EntityLayer.csproj" />
   </ItemGroup>
 

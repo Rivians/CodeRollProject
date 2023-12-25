@@ -1,0 +1,38 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model CodeRollProject.EntityLayer.Concrete.Event
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<main>
+    <div class="card-container card-containerCreate">
+        <div class="card cardCreate">
+            <div class="card-header">CREATE EVENT</div>
+            <div class="card-form">
+                <form asp-action="Index" asp-controller="CreateEvent" method="post" class="createForm">
+                    <label @* for="eName" *@>Event Name</label>
+                    <input asp-for="EventName" type="text" id="eName"><br>
+                    <label @* for="eDate" *@>Date</label>
+                    <input asp-for="EventTime" type="datetime-local"><br>
+                    <label @* for="ePlatform" *@>Platform</label>
+                    <select asp-for="EventPlatform" id="ePlatform">
+                        <option value="office">Office</option>
+                        <option value="zoom">Zoom</option>
+                        <option value="mcteams">Microsoft Teams</option>
+                        <option value="skype">Skype</option>
+                        <option value="other">Other</option>
+                    </select><br>
+                    <label @* for="eDesc" *@>Description</label>
+                    <textarea asp-for="EventDescription" id="eDesc" cols="35" rows="3"></textarea>
+                    <button type="submit">Oluştur</button>
+                </form>
+            </div>
+            <div class="card-button buttonCreate">
+                <button type="submit" class="button1">Create</button>
+            </div>
+        </div>
+    </div>
+</main>
+

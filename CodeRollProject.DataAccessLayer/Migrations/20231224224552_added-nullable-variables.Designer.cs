@@ -4,6 +4,7 @@ using CodeRollProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeRollProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231224224552_added-nullable-variables")]
+    partial class addednullablevariables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,19 +36,22 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("EventDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EventDuration")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EventName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EventPlatform")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EventTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("EventTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EventTitle")
                         .HasColumnType("nvarchar(max)");

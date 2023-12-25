@@ -13,7 +13,7 @@ namespace CodeRollProject.DataAccessLayer.Concrete
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("server=DESKTOP-OHHVBJO\\SQLEXPRESS; database=CodeRollDb; integrated security=true; TrustServerCertificate = True;");
+			optionsBuilder.UseSqlServer("server=DESKTOP-J0UOEGM\\SQLEXPRESS; database=CodeRollDb; integrated security=true; TrustServerCertificate = True;");
 		}
 		// dizüstü   DESKTOP-OHHVBJO\\SQLEXPRESS
 		// masaüstü  DESKTOP-J0UOEGM\\SQLEXPRESS
