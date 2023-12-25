@@ -26,12 +26,14 @@
                     </select><br>
                     <label @* for="eDesc" *@>Description</label>
                     <textarea asp-for="EventDescription" id="eDesc" cols="35" rows="3"></textarea>
-                    <button type="submit">Oluştur</button>
+                    <div class="card-button buttonCreate">
+                        <button type="submit" class="button1">Create</button>
+                    </div>
                 </form>
             </div>
-            <div class="card-button buttonCreate">
+            @* <div class="card-button buttonCreate">
                 <button type="submit" class="button1">Create</button>
-            </div>
+            </div> *@
         </div>
     </div>
 </main>

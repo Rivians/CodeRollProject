@@ -10,6 +10,8 @@ namespace CodeRollProject.PresentationLayer.Controllers
     public class CreateEventController : Controller
     {
         EventManager em = new EventManager(new EfEventRepository());
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -21,8 +23,12 @@ namespace CodeRollProject.PresentationLayer.Controllers
             if(ModelState.IsValid)
             {
                 em.TInsert(_event);
+                return RedirectToAction("Index","EventFinal",_event);
             }
-            return RedirectToAction("Index","EventFinal");
+            else
+            {
+                return View();
+            }          
         }
     }
 }

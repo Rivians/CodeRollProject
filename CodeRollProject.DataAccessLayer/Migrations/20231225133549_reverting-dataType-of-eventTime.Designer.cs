@@ -4,6 +4,7 @@ using CodeRollProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeRollProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231225133549_reverting-dataType-of-eventTime")]
+    partial class revertingdataTypeofeventTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,6 +58,25 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.Participant", b =>
+                {
+                    b.Property<int>("ParticipantID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParticipantID"), 1L, 1);
+
+                    b.Property<int>("EventID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ParticipantID");
+
+                    b.ToTable("Participants");
+                });
+
             modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.User", b =>
                 {
                     b.Property<int>("UserID")
@@ -96,12 +117,12 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                     b.Property<int>("EventID")
                         .HasColumnType("int");
 
+                    b.Property<int>("ParticipantID")
+                        .HasColumnType("int");
+
                     b.Property<string>("SelectedOption")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
 
                     b.HasKey("VoteID");
 
