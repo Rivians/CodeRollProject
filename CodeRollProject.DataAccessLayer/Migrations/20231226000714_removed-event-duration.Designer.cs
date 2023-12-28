@@ -4,6 +4,7 @@ using CodeRollProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeRollProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231226000714_removed-event-duration")]
+    partial class removedeventduration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +102,66 @@ namespace CodeRollProject.DataAccessLayer.Migrations
 
                     b.HasKey("VoteID");
 
+                    b.HasIndex("EventID");
+
+                    b.HasIndex("UserID");
+
                     b.ToTable("Votes");
+                });
+
+            modelBuilder.Entity("EventUser", b =>
+                {
+                    b.Property<int>("EventsEventID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventsEventID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("EventUser");
+                });
+
+            modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.Vote", b =>
+                {
+                    b.HasOne("CodeRollProject.EntityLayer.Concrete.Event", "Event")
+                        .WithMany("Votes")
+                        .HasForeignKey("EventID");
+
+                    b.HasOne("CodeRollProject.EntityLayer.Concrete.User", "User")
+                        .WithMany("Vote")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EventUser", b =>
+                {
+                    b.HasOne("CodeRollProject.EntityLayer.Concrete.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsEventID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CodeRollProject.EntityLayer.Concrete.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.Event", b =>
+                {
+                    b.Navigation("Votes");
+                });
+
+            modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.User", b =>
+                {
+                    b.Navigation("Vote");
                 });
 #pragma warning restore 612, 618
         }

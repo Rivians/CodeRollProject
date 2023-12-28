@@ -12,7 +12,9 @@
         <div class="logoContainer"><p>Code & Roll</p></div>
         <div class="buttonContainer">
             <ul>
-                <li><button class="logRegBtn"><a href="loginPage.html">Logout</a></button></li>
+                <form method="post" asp-action="Index" asp-controller="Logout">
+                     <li><button type="submit" class="logRegBtn">Logout</button></li>
+                </form>
             </ul>
         </div>
     </header>

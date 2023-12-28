@@ -11,15 +11,14 @@ namespace CodeRollProject.EntityLayer.Concrete
 	{
 		[Key]
         public int VoteID { get; set; }
-        public int EventID { get; set; }
-        public int UserID { get; set; }
-        public string SelectedOption { get; set; }
+        public string? VoteOption { get; set; }
 
 
+        public int? EventID { get; set; }
+        //public Event Event { get; set; }
 
-		// ilişkiler   ?????????????????????????????????????????????????????
-		//public Event Event { get; set; }
-		//public User User { get; set; }
-		//public Participant Participant { get; set; }
+
+        public int? UserID { get; set; }
+        //public User User { get; set; }
     }
 }

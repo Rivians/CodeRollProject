@@ -15,19 +15,13 @@ namespace CodeRollProject.EntityLayer.Concrete
         public string? EventTitle { get; set; }
         public string? EventDescription { get; set; }         /* */
         public string? EventPlatform { get; set; }            /* */
-        public DateTime? EventTime { get; set; }                /* */
-        public DateTime? EventDuration { get; set; }
-        public int? EventCreatorID { get; set; }
+        public DateTime? EventTime { get; set; }              /* */
+        public int? EventCreatorID { get; set; }     // yani UserID oluyor 
 
-        
 
 
         //// ilişkiler 
-        //public User User { get; set; }
-        //public List<Participant> Participants { get; set; }
+        //public List<User> User { get; set; }
         //public List<Vote> Votes { get; set; }
-
-
-
     }
 }

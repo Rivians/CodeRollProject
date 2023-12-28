@@ -1,4 +1,5 @@
-﻿@model CodeRollProject.EntityLayer.Concrete.Event
+﻿@* @model CodeRollProject.PresentationLayer.Models.UserEventVoteViewModel *@
+@model CodeRollProject.EntityLayer.Concrete.Event
 
 @{
     ViewData["Title"] = "Index";
@@ -22,9 +23,19 @@
             <div class="card-list">
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Toplantı İsmi : @Model.EventName</li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Toplantı Tarihi : @Model.EventTime</li>
-                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Toplantı Platformu : @Model.EventPlatform</li>
-                    <li class="listItem"><i class="fa-solid fa-square-plus"></i>Toplantı Açıklaması : @Model.EventDescription</li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Toplantı Tarihi : @Model.EventTime </li>
+                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Toplantı Platformu : @Model.EventPlatform </li>
+                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Toplantı Açıklaması : @Model.EventDescription</li>
+                </ul>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-list">
+                <ul class="list">
+                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Katılımcılar</li>
+                    <br />
+                    İsim : 
                 </ul>
             </div>
         </div>
