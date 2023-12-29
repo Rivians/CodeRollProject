@@ -22,8 +22,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
 		{
 			Context c = new Context();
 			var data = c.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
-			
-			
+					
 			if(data != null)
 			{
 				ViewData["User"] = user;

@@ -21,7 +21,7 @@ namespace CodeRollProject.EntityLayer.Concrete
 
 
         //// ilişkiler 
-        //public List<User> User { get; set; }
+        public List<User> User { get; set; }
         //public List<Vote> Votes { get; set; }
     }
 }

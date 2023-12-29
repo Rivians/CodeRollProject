@@ -19,7 +19,7 @@ namespace CodeRollProject.EntityLayer.Concrete
 
 
         //// ilişkiler 
-        //public List<Event> Events { get; set; }
+        public List<Event> Events { get; set; }
         //public List<Vote> Vote { get; set; }
     }
 }
