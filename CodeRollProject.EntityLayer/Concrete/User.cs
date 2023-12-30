@@ -15,10 +15,8 @@ namespace CodeRollProject.EntityLayer.Concrete
         public string? Email { get; set; }
         public string? Password { get; set; }
         public string? ConfirmPassword { get; set; }
-        public int? EventID { get; set; }
+        public int EventID { get; set; }
 
-
-        //// ilişkiler 
         public List<Event> Events { get; set; }
         //public List<Vote> Vote { get; set; }
     }

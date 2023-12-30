@@ -1,5 +1,5 @@
-﻿@* @model CodeRollProject.PresentationLayer.Models.UserEventVoteViewModel *@
-@model CodeRollProject.EntityLayer.Concrete.Event
+﻿@model CodeRollProject.PresentationLayer.Models.UserEventViewModel
+@* @model CodeRollProject.EntityLayer.Concrete.Event *@
 
 @{
     ViewData["Title"] = "Index";
@@ -22,10 +22,10 @@
             </div>
             <div class="card-list">
                 <ul class="list">
-                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Toplantı İsmi : @Model.EventName</li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Toplantı Tarihi : @Model.EventTime </li>
-                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Toplantı Platformu : @Model.EventPlatform </li>
-                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Toplantı Açıklaması : @Model.EventDescription</li>
+                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Toplantı İsmi : @Model._Event.EventName </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Toplantı Tarihi : @Model._Event.EventTime </li>
+                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Toplantı Platformu : @Model._Event.EventPlatform </li>
+                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Toplantı Açıklaması : @Model._Event.EventDescription </li>
                 </ul>
             </div>
         </div>
@@ -35,6 +35,10 @@
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Katılımcılar</li>
                     <br />
+                    @foreach (var item in Model._User)
+                    {
+                        @item.Name
+                    }
                 </ul>
             </div>
         </div>

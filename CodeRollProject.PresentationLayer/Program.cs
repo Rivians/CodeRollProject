@@ -5,7 +5,14 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddMvc().AddSessionStateTempDataProvider().AddJsonOptions(option =>				BU SERVÝS TEMPDATA SERÝLÝZE ETME SORUNU ÝÇÝN DENENDÝ, OLMADI.
+//{
+//	option.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+//});
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
+
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
@@ -30,6 +37,8 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
 	name: "default",

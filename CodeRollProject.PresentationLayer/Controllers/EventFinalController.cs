@@ -14,12 +14,15 @@ namespace CodeRollProject.PresentationLayer.Controllers
         Context c = new Context();
 
         [HttpGet]
-        public IActionResult Index(int eventID)
+        public IActionResult Index()
         {
-            var eventValues = em.TGetByID(eventID);
+            //var eventValues = em.TGetByID(eventID);
             //var eventUsers = c.Users.Where()
 
-            return View(eventValues);
+            var data = TempData["ViewModel"].ToString();
+            UserEventViewModel value = System.Text.Json.JsonSerializer.Deserialize<UserEventViewModel>(data);
+
+            return View(value);
         }
 
     }

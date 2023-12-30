@@ -4,6 +4,7 @@ using CodeRollProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeRollProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231229205700_added-table-relations")]
+    partial class addedtablerelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,9 +69,6 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EventID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -105,15 +104,15 @@ namespace CodeRollProject.DataAccessLayer.Migrations
 
             modelBuilder.Entity("EventUser", b =>
                 {
-                    b.Property<int>("EventsEventID")
+                    b.Property<int>("EventID")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersUserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.HasKey("EventsEventID", "UsersUserID");
+                    b.HasKey("EventID", "UserID");
 
-                    b.HasIndex("UsersUserID");
+                    b.HasIndex("UserID");
 
                     b.ToTable("EventUser");
                 });
@@ -122,13 +121,13 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                 {
                     b.HasOne("CodeRollProject.EntityLayer.Concrete.Event", null)
                         .WithMany()
-                        .HasForeignKey("EventsEventID")
+                        .HasForeignKey("EventID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CodeRollProject.EntityLayer.Concrete.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersUserID")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
