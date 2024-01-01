@@ -18,6 +18,7 @@ namespace CodeRollProject.EntityLayer.Concrete
         public int EventID { get; set; }
 
         public List<Event> Events { get; set; }
+
         //public List<Vote> Vote { get; set; }
     }
 }

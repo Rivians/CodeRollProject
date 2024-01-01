@@ -36,20 +36,18 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 _event.EventCreatorID = user.UserID;
 
                 em.TInsert(_event);
+                user.EventID = _event.EventID;
                 context.SaveChanges();
 
-                //user.EventID = _event.EventID;   // burası çalışmıyor ??? , saveChanges() ile artık çalışıyor. BU SATIRA GEREK YOK.
-                //context.SaveChanges();
-
-                var currentEvent = context.Events.Include(x => x.Users).FirstOrDefault(x => x.EventID == _event.EventID);  // LINQ SORGUSU
+                //var currentUsers = context.Users.Include(u => u.Events).Where(u => u.EventID == _event.EventID).ToList();
+                //var currentEvent = context.Events.Include(x => x.Users).FirstOrDefault(x => x.EventID == _event.EventID);  // LINQ SORGUSU
+                var currentEvent = context.Events.Include(e => e.Users).FirstOrDefault(e => e.EventID == _event.EventID);
                 //var currentUsers = context.Users.Where(y => y.EventID == _event.EventID).FirstOrDefault();
                 if (currentEvent != null)
                 {
                     viewModel._Event = currentEvent;
-                    viewModel._User = currentEvent.Users;
-                    //viewModel._User = currentUsers;
+                    viewModel._User = currentEvent.Users;   // viewModel._User null dönüyor !!!!
                     context.SaveChanges();
-                    
                 }
 
                 string jsonString = System.Text.Json.JsonSerializer.Serialize(viewModel);

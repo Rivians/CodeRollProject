@@ -18,6 +18,13 @@ namespace CodeRollProject.DataAccessLayer.Concrete
         // dizüstü   DESKTOP-OHHVBJO\\SQLEXPRESS
         // masaüstü  DESKTOP-J0UOEGM\\SQLEXPRESS
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<User>()
+        //        .HasMany(x => x.Events)
+        //}
+
+
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Vote> Votes { get; set; }
