@@ -19,6 +19,8 @@ namespace CodeRollProject.BusinessLayer.Concrete
             _eventDal = eventDal;
         }
 
+
+
         public void TDelete(Event t)
         {
             _eventDal.Delete(t);

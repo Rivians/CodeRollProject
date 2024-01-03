@@ -13,12 +13,7 @@ namespace CodeRollProject.EntityLayer.Concrete
         public int VoteID { get; set; }
         public string? VoteOption { get; set; }
 
-
         public int? EventID { get; set; }
-        //public Event Event { get; set; }
-
-
         public int? UserID { get; set; }
-        //public User User { get; set; }
     }
 }

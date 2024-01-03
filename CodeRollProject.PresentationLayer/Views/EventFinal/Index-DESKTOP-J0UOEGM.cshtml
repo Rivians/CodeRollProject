@@ -1,7 +1,5 @@
 ﻿@model CodeRollProject.PresentationLayer.Models.UserEventViewModel
 
-@* @model CodeRollProject.EntityLayer.Concrete.Event *@
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -38,8 +36,9 @@
                     <br />
                     @foreach (var item in Model._User)
                     {
-                        <span>İsim : @item.Name</span>
+                        <span>Kullanı İsmi : @item.Name</span>
                     }
+                    
                 </ul>
             </div>
         </div>

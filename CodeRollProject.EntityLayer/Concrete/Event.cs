@@ -16,10 +16,9 @@ namespace CodeRollProject.EntityLayer.Concrete
         public string? EventDescription { get; set; }         /* */
         public string? EventPlatform { get; set; }            /* */
         public DateTime? EventTime { get; set; }              /* */
-        public int? EventCreatorID { get; set; }     
+        public int? EventCreatorID { get; set; }
 
 
-        public List<User> Users { get; set; }
-        //public List<Vote> Votes { get; set; }
+        public List<EventUser> EventsUsers { get; set; }
     }
 }
