@@ -12,6 +12,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
     {
         EventManager em = new EventManager(new EfEventRepository());
         UserManager um = new UserManager(new EfUserRepository());
+        VoteManager vm = new VoteManager(new EfVoteRepository());
         EventUserManager eum = new EventUserManager(new EfEventUserRepository());
         Context context = new Context();
 
@@ -26,6 +27,14 @@ namespace CodeRollProject.PresentationLayer.Controllers
             ViewBag.Users = users;
 
             return View(value);
+        }
+
+        [HttpPost]
+        public IActionResult Index(Vote selectedOption)
+        {
+                
+
+            return RedirectToAction("Index","EventSummary");
         }
     }
 }

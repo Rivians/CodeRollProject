@@ -20,5 +20,6 @@ namespace CodeRollProject.EntityLayer.Concrete
 
 
         public virtual List<EventUser> EventsUsers { get; set; }
+        public virtual List<Vote> Votes { get; set; }
     }
 }

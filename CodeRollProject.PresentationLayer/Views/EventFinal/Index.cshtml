@@ -13,9 +13,15 @@
         <div class="card">
             <div class="card-header">Choose Availability</div>
             <div class="card-buttonS">
-                <div class="card-button"><button class="button1 availableBtn">Available</button></div>
+                <form asp-action="Index" asp-controller="EventFinal" method="post">
+                    <input type="radio" name="avaliability" /><span>Available</span><br />
+                    <input type="radio" name="avaliability" /><span>Busy</span><br />
+                    <input type="radio" name="avaliability" /><span>Uncertain</span><br />
+                    <button type="submit">Submit</button>
+                </form>
+@*                 <div class="card-button"><button class="button1 availableBtn">Available</button></div>
                 <div class="card-button"><button class="button1 busyBtn">Busy</button></div>
-                <div class="card-button"><button class="button1 uncertainBtn">Uncertain</button></div>
+                <div class="card-button"><button class="button1 uncertainBtn">Uncertain</button></div> *@
             </div>
         </div>
         <div class="card">
