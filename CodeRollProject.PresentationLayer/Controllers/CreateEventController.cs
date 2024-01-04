@@ -38,43 +38,24 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 Context context = new Context();
                 var user = context.Users.FirstOrDefault(x => x.Email == userEmail);
                 _event.EventCreatorID = user.UserID;
-                _event.EventsUsers = new List<EventUser>();
-                
+
                 em.TInsert(_event);
 
-                var eu = new EventUser();                      
+                var eu = new EventUser();
                 eu.EventID = _event.EventID;
                 eu.UserID = (int)_event.EventCreatorID;
                 eum.TInsert(eu);
 
-                //user.EventID = _event.EventID;
-
                 context.SaveChanges();
 
-                //var value = context.Events.Where(e => e.EventID == _event.EventID).ToList();
-
-                //var currentEvent = context.Events.Include(x => x.EventsUsers).ThenInclude(y => y.User).FirstOrDefault(e => e.EventID == _event.EventID);
-                var currentEvent = context.Events.FirstOrDefault(e => e.EventID == _event.EventID);
-                var currentUsers = context.EventsUsers.Include(eu => eu.User).Where(eu => eu.UserID == 6).ToList();
-                //var currentUsers = context.EventsUsers.ToList().Where(eu => eu.EventID == _event.EventID);
-
-                if (currentEvent != null)
-                {
-                    viewModel._Event = currentEvent;
-                    viewModel._User = currentUsers.Select(eu => eu.User).ToList();
-                    //viewModel._User = currentEvent.EventsUsers.Select(eu => eu.User).ToList();
-                    context.SaveChanges();                   
-                }
-
-                string jsonString = System.Text.Json.JsonSerializer.Serialize(viewModel);
-                TempData["ViewModel"] = jsonString;
+                string jsonString = System.Text.Json.JsonSerializer.Serialize(_event.EventID);
+                TempData["eventid"] = jsonString;
 
                 return RedirectToAction("Index", "EventFinal");
             }
             else
             {
                 return View();
-
             }
         }
 

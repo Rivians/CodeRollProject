@@ -19,6 +19,6 @@ namespace CodeRollProject.EntityLayer.Concrete
         public int? EventCreatorID { get; set; }
 
 
-        public List<EventUser> EventsUsers { get; set; }
+        public virtual List<EventUser> EventsUsers { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace CodeRollProject.EntityLayer.Concrete
         public int EventID { get; set; }
 
 
-        public User User { get; set; }
-        public Event Event { get; set; }
+        public virtual User User { get; set; }
+        public virtual Event Event { get; set; }
     }
 }
