@@ -1,8 +1,39 @@
-﻿
+﻿@model EventSummaryViewModel
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h1>Index</h1>
-
+<div class="card-container">
+    <div class="card">
+        <div class="card-title">
+            <h2>EVENT DETAILS</h2>
+        </div>
+        <div class="card-list">
+            <ul class="list">
+                <li class="listItem"><i class="fa-solid fa-address-card"></i>Toplantı İsmi : @ViewBag.Event.EventName </li>
+                <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Toplantı Tarihi : @ViewBag.Event.EventTime </li>
+                <li class="listItem"><i class="fa-solid fa-location-dot"></i>Toplantı Platformu : @ViewBag.Event.EventPlatform </li>
+                <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Toplantı Açıklaması : @ViewBag.Event.EventDescription </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title">
+            <h2>Participants/Votes</h2>
+        </div>
+        <div class="card-list">
+            <ul class="list">
+                @foreach (var item in Model.Users)
+                {
+                    @item.Name <span> = </span> foreach (var item2 in Model.Votes)
+                    {
+                        @item2.VoteOption
+                    }
+                }
+                <br />
+            </ul>
+        </div>
+    </div>
+</div>

@@ -51,6 +51,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 string jsonString = System.Text.Json.JsonSerializer.Serialize(_event.EventID);
                 TempData["eventid"] = jsonString;
 
+                string jsonString2 = System.Text.Json.JsonSerializer.Serialize(_event);
+                TempData["eventDatas"] = jsonString2;
+
                 return RedirectToAction("Index", "EventFinal");
             }
             else

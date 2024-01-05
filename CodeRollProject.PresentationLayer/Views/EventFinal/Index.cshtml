@@ -14,9 +14,9 @@
             <div class="card-header">Choose Availability</div>
             <div class="card-buttonS">
                 <form asp-action="Index" asp-controller="EventFinal" method="post">
-                    <input type="radio" name="avaliability" /><span>Available</span><br />
-                    <input type="radio" name="avaliability" /><span>Busy</span><br />
-                    <input type="radio" name="avaliability" /><span>Uncertain</span><br />
+                    <input type="radio" name="selectedOption" value="++" /><span>Available</span><br />
+                    <input type="radio" name="selectedOption" value="--" /><span>Busy</span><br />
+                    <input type="radio" name="selectedOption" value="??" /><span>Uncertain</span><br />
                     <button type="submit">Submit</button>
                 </form>
 @*                 <div class="card-button"><button class="button1 availableBtn">Available</button></div>

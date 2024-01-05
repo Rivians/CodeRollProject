@@ -5,6 +5,7 @@ using CodeRollProject.EntityLayer.Concrete;
 using CodeRollProject.PresentationLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CodeRollProject.PresentationLayer.Controllers
 {
@@ -17,7 +18,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         Context context = new Context();
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(Event e)
         {
             var data = TempData["eventid"].ToString();
             var eventId = System.Text.Json.JsonSerializer.Deserialize<int>(data);
@@ -30,9 +31,22 @@ namespace CodeRollProject.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Vote selectedOption)
+        public IActionResult Index(string selectedOption)
         {
-                
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var user = context.Users.FirstOrDefault(u => u.Email == userEmail);
+
+            var data = TempData["eventDatas"].ToString();
+            var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
+
+            var Vote = new Vote
+            {
+                VoteOption = selectedOption,
+                UserID = user.UserID,
+                EventID = currentEvent.EventID
+            };
+            vm.TInsert(Vote);
+
 
             return RedirectToAction("Index","EventSummary");
         }
