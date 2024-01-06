@@ -18,7 +18,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         Context context = new Context();
 
         [HttpGet]
-        public IActionResult Index(Event e)
+        public IActionResult Index()
         {
             var data = TempData["eventid"].ToString();
             var eventId = System.Text.Json.JsonSerializer.Deserialize<int>(data);
@@ -45,8 +45,16 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 UserID = user.UserID,
                 EventID = currentEvent.EventID
             };
-            vm.TInsert(Vote);
 
+            var eu = new EventUser();
+            eu.EventID = currentEvent.EventID;
+            eu.UserID = (int)currentEvent.EventCreatorID;
+            context.SaveChanges();
+
+            eum.TInsert(eu);
+            vm.TInsert(Vote);
+            context.SaveChanges();
+        
 
             return RedirectToAction("Index","EventSummary");
         }

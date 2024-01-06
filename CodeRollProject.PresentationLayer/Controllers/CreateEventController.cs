@@ -39,12 +39,13 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 var user = context.Users.FirstOrDefault(x => x.Email == userEmail);
                 _event.EventCreatorID = user.UserID;
 
+                _event.EventUrl = em.GenerateRandomUrl();
                 em.TInsert(_event);
 
-                var eu = new EventUser();
-                eu.EventID = _event.EventID;
-                eu.UserID = (int)_event.EventCreatorID;
-                eum.TInsert(eu);
+                //var eu = new EventUser();
+                //eu.EventID = _event.EventID;
+                //eu.UserID = (int)_event.EventCreatorID;
+                //eum.TInsert(eu);
 
                 context.SaveChanges();
 

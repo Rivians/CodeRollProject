@@ -27,12 +27,9 @@
             <ul class="list">
                 @foreach (var item in Model.Users)
                 {
-                    @item.Name <span> = </span> foreach (var item2 in Model.Votes)
-                    {
-                        @item2.VoteOption
-                    }
+                    @item.Name <span> = </span> @item.Votes.Select(v => v.VoteOption).FirstOrDefault()
+                    <br />
                 }
-                <br />
             </ul>
         </div>
     </div>
