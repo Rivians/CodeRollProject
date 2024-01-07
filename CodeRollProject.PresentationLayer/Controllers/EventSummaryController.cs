@@ -11,7 +11,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         EventSummaryViewModel _eventSummaryViewModel = new EventSummaryViewModel();
         Context context = new Context();
 
-        public IActionResult Index()
+        public IActionResult Index(string url)
         {
             var data = TempData["eventDatas"].ToString();
             var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
