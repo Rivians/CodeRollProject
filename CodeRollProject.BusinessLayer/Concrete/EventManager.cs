@@ -23,7 +23,9 @@ namespace CodeRollProject.BusinessLayer.Concrete
 
         public string GenerateFullUrl()
         {
-            throw new NotImplementedException();
+            string randomUrl = GenerateRandomUrl();
+            string fullUrl = "CodeRoll/EventFinal/Index" + randomUrl;
+            return fullUrl;
         }
 
         public string GenerateRandomUrl()

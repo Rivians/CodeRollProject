@@ -3,12 +3,14 @@ using CodeRollProject.DataAccessLayer.Concrete;
 using CodeRollProject.DataAccessLayer.EntityFramework;
 using CodeRollProject.EntityLayer.Concrete;
 using CodeRollProject.PresentationLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace CodeRollProject.PresentationLayer.Controllers
 {
+    [Authorize]
     public class EventFinalController : Controller
     {
         EventManager em = new EventManager(new EfEventRepository());
@@ -18,7 +20,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         Context context = new Context();
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string randomUrl,int a) // post olan index action'un parametresinden farklı olsun diye int a ekledik. aslında kullanılmıyor.
         {
             var data = TempData["eventid"].ToString();
             var eventId = System.Text.Json.JsonSerializer.Deserialize<int>(data);
@@ -55,8 +57,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
             vm.TInsert(Vote);
             context.SaveChanges();
 
-
-            return RedirectToAction("Index", "EventSummary");
+            return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl });
         }
     }
 }

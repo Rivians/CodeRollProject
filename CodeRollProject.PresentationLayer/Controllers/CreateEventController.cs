@@ -5,6 +5,7 @@ using CodeRollProject.DataAccessLayer.EntityFramework;
 //using CodeRollProject.DtoLayer.Dtos.CreateEventDto;
 using CodeRollProject.EntityLayer.Concrete;
 using CodeRollProject.PresentationLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ using System.Text.Json.Serialization;
 
 namespace CodeRollProject.PresentationLayer.Controllers
 {
+    [Authorize]
     public class CreateEventController : Controller
     {
         EventManager em = new EventManager(new EfEventRepository());
@@ -55,7 +57,8 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 string jsonString2 = System.Text.Json.JsonSerializer.Serialize(_event);
                 TempData["eventDatas"] = jsonString2;
 
-                return RedirectToAction("Index", "EventFinal");
+                string eventurl = _event.EventUrl;
+                return RedirectToAction("Index", "EventFinal", new { id = eventurl });
             }
             else
             {
