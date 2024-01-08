@@ -1,4 +1,5 @@
 ﻿using CodeRollProject.BusinessLayer.Concrete;
+using CodeRollProject.BusinessLayer.ValidationRules;
 using CodeRollProject.DataAccessLayer.Concrete;
 using CodeRollProject.DataAccessLayer.EntityFramework;
 //using CodeRollProject.DtoLayer.Dtos.CreateEventDto;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 
@@ -19,6 +21,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         EventManager em = new EventManager(new EfEventRepository());
         EventUserManager eum = new EventUserManager(new EfEventUserRepository());
         UserEventViewModel viewModel = new UserEventViewModel();
+        EventCreateValidator ecv = new EventCreateValidator();
 
         [HttpGet]
         public IActionResult Index()
@@ -30,8 +33,10 @@ namespace CodeRollProject.PresentationLayer.Controllers
         [HttpPost]
         public IActionResult Index(Event _event)
         {
+            var result = ecv.Validate(_event);
+            
             //if (ModelState.IsValid) 
-            if (_event != null)
+            if (_event != null && result.IsValid)
             {
                 var userEmail = User.FindFirstValue(ClaimTypes.Email);  // login yapan user'in emailini aldık
 
@@ -41,11 +46,6 @@ namespace CodeRollProject.PresentationLayer.Controllers
 
                 _event.EventUrl = em.GenerateRandomUrl();
                 em.TInsert(_event);
-
-                //var eu = new EventUser();
-                //eu.EventID = _event.EventID;
-                //eu.UserID = (int)_event.EventCreatorID;
-                //eum.TInsert(eu);
 
                 context.SaveChanges();
 
@@ -59,6 +59,10 @@ namespace CodeRollProject.PresentationLayer.Controllers
             }
             else
             {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
                 return View();
             }
         }

@@ -54,9 +54,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
             eum.TInsert(eu);
             vm.TInsert(Vote);
             context.SaveChanges();
-        
 
-            return RedirectToAction("Index","EventSummary");
+
+            return RedirectToAction("Index", "EventSummary");
         }
     }
 }

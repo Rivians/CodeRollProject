@@ -17,7 +17,6 @@ namespace CodeRollProject.BusinessLayer.ValidationRules
 			RuleFor(x => x.Password).NotEmpty().WithMessage("Email alanı boş geçilemez.");
 			RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Email alanı boş geçilemez.");
 
-
 			RuleFor(x => x.Name).MinimumLength(2).WithMessage("İsim alanı en az 2 karaterden oluşmalıdır.");
 			RuleFor(x => x.Password).MinimumLength(6).WithMessage("Şifreniz en az 6 karakterden oluşmalıdır.");			
 

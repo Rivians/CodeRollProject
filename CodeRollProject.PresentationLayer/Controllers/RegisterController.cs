@@ -14,8 +14,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
 	public class RegisterController : Controller
 	{
 		UserManager um = new UserManager(new EfUserRepository());
+        UserRegisterValidator urv = new UserRegisterValidator();
 
-		[HttpGet]
+        [HttpGet]
 		public IActionResult Index()
 		{
 			return View();
@@ -24,10 +25,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
 		[HttpPost]
 		public IActionResult Index(User user)
 		{
-			UserRegisterValidator urv = new UserRegisterValidator();
-			ValidationResult result = urv.Validate(user);
+            ValidationResult result = urv.Validate(user);
 
-			if(result.IsValid)
+            if (result.IsValid)
 			{
 				um.TInsert(user);
 				return RedirectToAction("Index", "Login");
