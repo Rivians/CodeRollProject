@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<main>
+@* <main>
     <div class="card-container">
         <div class="card">
             <div class="card-header">Choose Availability</div>
@@ -51,15 +51,50 @@
             </div>
         </div>
     </div>
+</main> *@
+
+
+<main>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">Choose Availability</div>
+            <div class="card-buttonS">
+                <form asp-action="Index" asp-controller="EventFinal" method="post" id="my-form">
+                    <input type="radio" name="selectedOption" value="Available" /><span>Available</span><br />
+                    <input type="radio" name="selectedOption" value="Busy" /><span>Busy</span><br />
+                    <input type="radio" name="selectedOption" value="Uncertain" /><span>Uncertain</span><br />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-writing">
+                <p>EVENT DETAILS</p>
+            </div>
+            <div class="card-list">
+                <ul class="list">
+                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Event Name : @Model.EventName </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime </li>
+                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Event Platform : @Model.EventPlatform </li>
+                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Event Description : @Model.EventDescription </li>
+                </ul>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-list">
+                <ul class="list">
+                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants</li>
+                    <br />
+                    @if (ViewBag.Users != null)
+                    {
+                        @foreach (var item in ViewBag.Users)
+                        {
+                            <span>İsim : @item.Name </span>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 </main>
-
-@*<script>
-    document.getElementById('my-form').addEventListener('submit', function (event) {
-        // Formun varsayılan davranışını engelle
-        event.preventDefault();
-
-        // JavaScript ile yönlendirme işlemleri
-        window.location.href = '/EventSummary/Index/@Model.EventUrl' + encodeURIComponent('eventURL');
-    });
-</script>
-*@

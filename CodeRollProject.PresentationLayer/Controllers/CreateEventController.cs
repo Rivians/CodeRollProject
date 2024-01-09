@@ -46,19 +46,21 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 var user = context.Users.FirstOrDefault(x => x.Email == userEmail);
                 _event.EventCreatorID = user.UserID;
 
-                _event.EventUrl = em.GenerateRandomUrl();
                 em.TInsert(_event);
-
+                _event.EventUrl = em.GenerateRandomUrl() + "?eventid=" + _event.EventID.ToString();
+                _event.EventFullUrl = "/EventFinal/Index/" + _event.EventUrl;
+                em.TUpdate(_event);
                 context.SaveChanges();
 
-                string jsonString = System.Text.Json.JsonSerializer.Serialize(_event.EventID);
-                TempData["eventid"] = jsonString;
+                //string jsonString = System.Text.Json.JsonSerializer.Serialize(_event.EventID);          
+                //TempData["eventid"] = jsonString;                                                    // BUNA GEREK KALMADI.
 
                 string jsonString2 = System.Text.Json.JsonSerializer.Serialize(_event);
                 TempData["eventDatas"] = jsonString2;
 
-                string eventurl = _event.EventUrl;
-                return RedirectToAction("Index", "EventFinal", new { id = eventurl });
+                HttpContext.Session.SetString("EventData", JsonConvert.SerializeObject(_event));
+
+                return RedirectToAction("Index", "EventFinal", new { id = _event.EventUrl, eventid = _event.EventID } );
             }
             else
             {

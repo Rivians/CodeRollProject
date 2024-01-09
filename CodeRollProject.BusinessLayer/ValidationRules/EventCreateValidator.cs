@@ -14,8 +14,8 @@ namespace CodeRollProject.BusinessLayer.ValidationRules
         {
             RuleFor(x => x.EventName).NotEmpty().WithMessage("Event adı boş geçilemez.");
             RuleFor(x => x.EventTime).NotEmpty().WithMessage("Event tarihi boş geçilemez.");
-            RuleFor(x => x.EventDescription).NotEmpty().WithMessage("Event açıklaması boş geçilemez.");
-            RuleFor(x => x.EventPlatform).NotEmpty().WithMessage("Event platformu boş geçilemez.");
+            //RuleFor(x => x.EventDescription).NotEmpty().WithMessage("Event açıklaması boş geçilemez.");
+            //RuleFor(x => x.EventPlatform).NotEmpty().WithMessage("Event platformu boş geçilemez.");
 
             RuleFor(x => x.EventName).MinimumLength(3).WithMessage("Event adı minimum 3 harften oluşmalıdır.");
 

@@ -20,13 +20,13 @@ namespace CodeRollProject.PresentationLayer.Controllers
         Context context = new Context();
 
         [HttpGet]
-        public IActionResult Index(string randomUrl,int a) // post olan index action'un parametresinden farklı olsun diye int a ekledik. aslında kullanılmıyor.
+        public IActionResult Index(string randomUrl,int eventid) // post olan index action'un parametresinden farklı olsun diye int a ekledik. aslında kullanılmıyor.
         {
-            var data = TempData["eventid"].ToString();
-            var eventId = System.Text.Json.JsonSerializer.Deserialize<int>(data);
+            //var data = TempData["eventid"].ToString();
+            //var eventId = System.Text.Json.JsonSerializer.Deserialize<int>(data);
 
-            Event value = context.Events.FirstOrDefault(e => e.EventID == eventId);
-            var users = context.EventsUsers.Include(eu => eu.User).Where(eu2 => eu2.EventID == eventId).Select(eu3 => eu3.User);
+            Event value = context.Events.FirstOrDefault(e => e.EventID == eventid);
+            var users = context.EventsUsers.Include(eu => eu.User).Where(eu2 => eu2.EventID == eventid).Select(eu3 => eu3.User);
             ViewBag.Users = users;
 
             return View(value);
@@ -57,7 +57,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
             vm.TInsert(Vote);
             context.SaveChanges();
 
-            return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl });
+            return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
         }
     }
 }

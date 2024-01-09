@@ -186,7 +186,7 @@ main{
 
 .card-container{
     height: 520px;
-    width: 900px;
+    width: 1240px;
 
     display: flex;
     justify-content: space-evenly;
@@ -292,10 +292,43 @@ main{
 
 /*create page*/
 .card-containerCreate{
-    height: 550px;
+    height: 650px;
 }
 .cardCreate{
     margin-top: 100px;
+}
+#my-form{
+    height: 200px;
+    align-items: center;
+    display: inline;
+    justify-content: center;
+    span{
+        font-size: 22px;
+    }
+    span:hover{
+        color: #FF6969;
+    }
+    input{
+        font-size: 14px;
+        margin-bottom: 50px;
+    }
+    button{
+        background-color: #141E46;
+        color: #FFF5E0;
+        padding: 10px;
+        border-radius: 8px;
+        width: 100%;
+        border: 0px;
+
+    }
+    button:hover{
+        background-color: #FFF5E0;
+        border: solid 2px;
+        border-color: #141E46;
+        cursor: pointer;
+        
+        color: #141E46;
+    }
 }
 .card-form{
     margin-top: 25px;
@@ -341,7 +374,7 @@ main{
 /*Dashboard page*/
 
 .card-buttonS{
-    margin-top: 25px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -356,4 +389,42 @@ main{
         background-color: orange;
         /* color: #141E46; */
     }
+}
+
+/*summary page*/
+
+.text-container{
+    justify-content: center;
+    display: flex;
+    padding-top: 50px;
+    align-items: center;
+    label{
+        margin-right: 5px;
+    }
+    input{
+        background-color: transparent;
+        outline: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        
+    }
+    button{
+        background-color: #141E46;
+        color: #FFF5E0;
+        border-radius: 8px;
+        padding: 5px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+.card-containerSummary{
+    position: relative;
+    left: 10%;
+}
+.summarypagemain{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    justify-content: center;
 }
