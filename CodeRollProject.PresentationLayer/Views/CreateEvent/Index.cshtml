@@ -1,5 +1,4 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@* @model CodeRollProject.PresentationLayer.Models.UserEventVoteViewModel *@
 @model CodeRollProject.EntityLayer.Concrete.Event
  
 @{
@@ -13,15 +12,23 @@
             <div class="card-header">CREATE EVENT</div>
             <div class="card-form">
                 <form asp-action="Index" asp-controller="CreateEvent" method="post" class="createForm">
-                    <label @* for="eName" *@>Event Name</label>
+                    <label>Event Name</label>
                     <input asp-for="EventName" type="text" id="eName">
                     <span asp-validation-for="EventName" style="color:red"></span>
                     <br>
-                    <label @* for="eDate" *@>Date</label>
-                    <input asp-for="EventTime" type="datetime-local">
-                    <span asp-validation-for="EventTime" style="color:red"></span>
+                    <label>Date Option 1 :</label>
+                     <input asp-for="EventTime1" type="datetime-local">
+                      <span asp-validation-for="EventTime1" style="color:red"></span>
+                     <br>
+                    <label>Date Option 2 :</label>
+                    <input asp-for="EventTime2" type="datetime-local">
+                    <span asp-validation-for="EventTime2" style="color:red"></span>
                     <br>
-                    <label @* for="ePlatform" *@>Platform</label>
+                    <label>Date Option 3 :</label>
+                    <input asp-for="EventTime3" type="datetime-local">
+                    <span asp-validation-for="EventTime3" style="color:red"></span>
+                    <br>
+                    <label>Platform</label>
                     <select asp-for="EventPlatform" id="ePlatform">
                         <option value="office">Office</option>
                         <option value="zoom">Zoom</option>
@@ -31,7 +38,7 @@
                     </select>
                     <span asp-validation-for="EventPlatform" style="color:red"></span>
                     <br>
-                    <label @* for="eDesc" *@>Description</label>
+                    <label>Description</label>
                     <textarea asp-for="EventDescription" id="eDesc" cols="35" rows="3"></textarea>
                     <span asp-validation-for="EventDescription" style="color:red"></span>
                     <div class="card-button buttonCreate">

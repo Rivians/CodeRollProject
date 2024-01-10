@@ -21,7 +21,6 @@ namespace CodeRollProject.PresentationLayer.Controllers
     public class CreateEventController : Controller
     {
         EventManager em = new EventManager(new EfEventRepository());
-        EventUserManager eum = new EventUserManager(new EfEventUserRepository());
         UserEventViewModel viewModel = new UserEventViewModel();
         EventCreateValidator ecv = new EventCreateValidator();
 
@@ -37,14 +36,13 @@ namespace CodeRollProject.PresentationLayer.Controllers
         {
             var result = ecv.Validate(_event);
             
-            //if (ModelState.IsValid) 
             if (_event != null && result.IsValid)
             {
                 var userEmail = User.FindFirstValue(ClaimTypes.Email);  // login yapan user'in emailini aldık
 
                 Context context = new Context();
                 var user = context.Users.FirstOrDefault(x => x.Email == userEmail);
-                _event.EventCreatorID = user.UserID;
+                _event.UserID = user.UserID;  // eventi oluştaranın kim oldugunu belirttik.
 
                 em.TInsert(_event);
                 _event.EventUrl = em.GenerateRandomUrl() + "?eventid=" + _event.EventID.ToString();
@@ -52,13 +50,10 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 em.TUpdate(_event);
                 context.SaveChanges();
 
-                //string jsonString = System.Text.Json.JsonSerializer.Serialize(_event.EventID);          
-                //TempData["eventid"] = jsonString;                                                    // BUNA GEREK KALMADI.
-
                 string jsonString2 = System.Text.Json.JsonSerializer.Serialize(_event);
-                TempData["eventDatas"] = jsonString2;
+                TempData["EventData"] = jsonString2;
 
-                HttpContext.Session.SetString("EventData", JsonConvert.SerializeObject(_event));
+                HttpContext.Session.SetString("EventData", JsonConvert.SerializeObject(_event));  // _event'in tüm verilerini EventData isminde bir Key'e atadık. Bu keyde Sessionda tutuluyor.
 
                 return RedirectToAction("Index", "EventFinal", new { id = _event.EventUrl, eventid = _event.EventID } );
             }

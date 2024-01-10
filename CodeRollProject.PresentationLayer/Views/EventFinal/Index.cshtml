@@ -1,68 +1,35 @@
-﻿@model CodeRollProject.EntityLayer.Concrete.Event
-
-@* @model CodeRollProject.PresentationLayer.Models.UserEventViewModel *@
-
+﻿@model EventVoteViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-@* <main>
-    <div class="card-container">
-        <div class="card">
-            <div class="card-header">Choose Availability</div>
-            <div class="card-buttonS">
-                <form asp-action="Index" asp-controller="EventFinal" method="post" id="my-form">
-                    <input type="radio" name="selectedOption" value="Available" /><span>Available</span><br />
-                    <input type="radio" name="selectedOption" value="Busy" /><span>Busy</span><br />
-                    <input type="radio" name="selectedOption" value="Uncertain" /><span>Uncertain</span><br />
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-writing">
-                <p>EVENT DETAILS</p>
-            </div>
-            <div class="card-list">
-                <ul class="list">
-                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Toplantı İsmi : @Model.EventName </li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Toplantı Tarihi : @Model.EventTime </li>
-                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Toplantı Platformu : @Model.EventPlatform </li>
-                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Toplantı Açıklaması : @Model.EventDescription </li>
-                </ul>
-            </div>
-        </div>
-        <br />
-        <div class="card">
-            <div class="card-list">
-                <ul class="list">
-                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Katılımcılar</li>
-                    <br />
-                    @if (ViewBag.Users != null)
-                    {
-                        @foreach (var item in ViewBag.Users)
-                        {
-                            <span>İsim : @item.Name </span>
-                        }
-                    }              
-                </ul>
-            </div>
-        </div>
-    </div>
-</main> *@
-
-
 <main>
     <div class="card-container">
         <div class="card">
-            <div class="card-header">Choose Availability</div>
+            <div class="card-header">Choose Time</div>
             <div class="card-buttonS">
                 <form asp-action="Index" asp-controller="EventFinal" method="post" id="my-form">
-                    <input type="radio" name="selectedOption" value="Available" /><span>Available</span><br />
-                    <input type="radio" name="selectedOption" value="Busy" /><span>Busy</span><br />
-                    <input type="radio" name="selectedOption" value="Uncertain" /><span>Uncertain</span><br />
+                    <lable>Name : </lable>
+                    <input />
+                    @foreach (var item in Model.votee)
+                    {
+                         <input type="text" asp-for="@item.ParticipantName"/>
+                    }                   
+                    <br />
+                    @if (Model.eventt.EventTime1 != null)
+                    {
+                        <input type="checkbox" name="selectedOption" value=@Model.eventt.EventTime1.ToString() /><span>@Model.eventt.EventTime1</span><br />
+                    }
+                    @if (Model.eventt.EventTime2 != null)
+                    {
+                        <input type="checkbox" name="selectedOption" value="@Model.eventt.EventTime2.ToString()" /><span>@Model.eventt.EventTime2</span><br />
+                    }
+                    @if (Model.eventt.EventTime3 != null)
+                    {
+                        <input type="checkbox" name="selectedOption" value="@Model.eventt.EventTime3.ToString()" /><span>@Model.eventt.EventTime3</span><br />
+                    }                                     
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -73,10 +40,12 @@
             </div>
             <div class="card-list">
                 <ul class="list">
-                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Event Name : @Model.EventName </li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime </li>
-                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Event Platform : @Model.EventPlatform </li>
-                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Event Description : @Model.EventDescription </li>
+                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Event Name : @Model.eventt.EventName </li>
+                    @* <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime1 </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime2 </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime3 </li> *@
+                    <li class="listItem"><i class="fa-solid fa-location-dot"></i>Event Platform : @Model.eventt.EventPlatform </li>
+                    <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Event Description : @Model.eventt.EventDescription </li>
                 </ul>
             </div>
         </div>
@@ -86,11 +55,11 @@
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants</li>
                     <br />
-                    @if (ViewBag.Users != null)
+                    @if (Model.votee != null)
                     {
-                        @foreach (var item in ViewBag.Users)
+                        @foreach (var item in Model.votee)
                         {
-                            <span>İsim : @item.Name </span>
+                             <span>İsim : @item.ParticipantName </span>
                         }
                     }
                 </ul>

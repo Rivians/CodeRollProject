@@ -13,7 +13,7 @@ namespace CodeRollProject.BusinessLayer.ValidationRules
         public EventCreateValidator()
         {
             RuleFor(x => x.EventName).NotEmpty().WithMessage("Event adı boş geçilemez.");
-            RuleFor(x => x.EventTime).NotEmpty().WithMessage("Event tarihi boş geçilemez.");
+            //RuleFor(x => x.EventTime).NotEmpty().WithMessage("Event tarihi boş geçilemez.");
             //RuleFor(x => x.EventDescription).NotEmpty().WithMessage("Event açıklaması boş geçilemez.");
             //RuleFor(x => x.EventPlatform).NotEmpty().WithMessage("Event platformu boş geçilemez.");
 
