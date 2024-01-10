@@ -31,8 +31,8 @@ namespace CodeRollProject.PresentationLayer.Controllers
             var currentEvent = context.Events.FirstOrDefault(e => e.EventID == eventid);
             ViewBag.Event = currentEvent;
 
-            _eventSummaryViewModel.Votes = context.Votes.Where(v => v.EventID == currentEvent.EventID).OrderBy(v => v.UserID).ToList();
-            _eventSummaryViewModel.Users = context.EventsUsers.Include(eu => eu.User).Where(eu => eu.EventID == currentEvent.EventID).Select(eu => eu.User).ToList();
+            //_eventSummaryViewModel.Votes = context.Votes.Where(v => v.EventID == currentEvent.EventID).OrderBy(v => v.UserID).ToList();
+            //_eventSummaryViewModel.Users = context.EventsUsers.Include(eu => eu.User).Where(eu => eu.EventID == currentEvent.EventID).Select(eu => eu.User).ToList();
 
             return View(_eventSummaryViewModel);
         }

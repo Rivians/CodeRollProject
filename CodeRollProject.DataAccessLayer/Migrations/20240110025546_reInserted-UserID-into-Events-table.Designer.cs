@@ -4,6 +4,7 @@ using CodeRollProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeRollProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240110025546_reInserted-UserID-into-Events-table")]
+    partial class reInsertedUserIDintoEventstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +56,7 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                     b.Property<string>("EventUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserID")
+                    b.Property<int?>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("EventID");
@@ -100,8 +102,8 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                     b.Property<int>("EventID")
                         .HasColumnType("int");
 
-                    b.Property<string>("ParticipantName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ParticipantName")
+                        .HasColumnType("int");
 
                     b.Property<string>("VoteOption")
                         .HasColumnType("nvarchar(max)");
@@ -117,9 +119,7 @@ namespace CodeRollProject.DataAccessLayer.Migrations
                 {
                     b.HasOne("CodeRollProject.EntityLayer.Concrete.User", "User")
                         .WithMany("Events")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserID");
 
                     b.Navigation("User");
                 });

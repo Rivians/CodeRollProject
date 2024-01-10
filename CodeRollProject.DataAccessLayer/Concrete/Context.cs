@@ -13,7 +13,7 @@ namespace CodeRollProject.DataAccessLayer.Concrete
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("server=DESKTOP-J0UOEGM\\SQLEXPRESS; database=CodeRollDb; integrated security=true; TrustServerCertificate = True;");
+			optionsBuilder.UseSqlServer("server=DESKTOP-J0UOEGM\\SQLEXPRESS; database=CodeRollDb2; integrated security=true; TrustServerCertificate = True;");
 		}
         // dizüstü   DESKTOP-OHHVBJO\\SQLEXPRESS
         // masaüstü  DESKTOP-J0UOEGM\\SQLEXPRESS
@@ -27,7 +27,6 @@ namespace CodeRollProject.DataAccessLayer.Concrete
 
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<EventUser> EventsUsers { get; set; }
         public DbSet<Vote> Votes { get; set; }
     }
 }
