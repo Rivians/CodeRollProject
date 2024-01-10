@@ -54,7 +54,13 @@ namespace CodeRollProject.PresentationLayer.Controllers
             context.SaveChanges();
 
             eum.TInsert(eu);
-            vm.TInsert(Vote);
+
+            var value = context.Votes.FirstOrDefault(v => v.UserID == user.UserID && v.EventID == currentEvent.EventID);
+            if(value == null)
+            {
+                vm.TInsert(Vote);
+            }
+                       
             context.SaveChanges();
 
             return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });

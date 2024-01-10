@@ -374,7 +374,6 @@ main{
 /*Dashboard page*/
 
 .card-buttonS{
-
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

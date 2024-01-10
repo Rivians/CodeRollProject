@@ -74,10 +74,12 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>       
     <div class="text-container">
-        <label for="">Email Girin</label>
-        <input type="email">
-        <button type="submit">Gönder</button>
+@*         <label>Event Link : @ViewBag.Event.EventFullUrl </label>
+ *@        @* <input type="email">
+        <button type="submit">Gönder</button> *@
+        <label>Event Link : </label>
+        <a href="#">@ViewBag.Event.EventFullUrl</a>
     </div>
 </main>
