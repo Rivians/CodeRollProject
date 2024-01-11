@@ -16,6 +16,8 @@ namespace CodeRollProject.PresentationLayer.Controllers
         EventManager em = new EventManager(new EfEventRepository());
         UserManager um = new UserManager(new EfUserRepository());
         VoteManager vm = new VoteManager(new EfVoteRepository());
+        VoteOptionManager vom = new VoteOptionManager(new EfVoteOptionRepository());
+
         EventVoteViewModel evwm = new EventVoteViewModel();
         Context context = new Context();
 
@@ -29,13 +31,12 @@ namespace CodeRollProject.PresentationLayer.Controllers
             //var users = context.EventsUsers.Include(eu => eu.User).Where(eu2 => eu2.EventID == eventid).Select(eu3 => eu3.User);
             //ViewBag.Users = users;
 
-            var eventValue = context.Events.Include(e => e.Votes).FirstOrDefault(e => e.EventID == eventid);
+            var eventValue = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == eventid);
 
             evwm = new EventVoteViewModel()
             {
                 eventt = eventValue,
-                votee = eventValue.Votes.ToList(),
-                
+                voteOptionn = eventValue.Votes.SelectMany(v => v.VoteOptions).ToList(),                
             };
 
             //var eventDataWithVotes = context.Events.Where(e => e.EventID != eventid).Select(e => new { Event = e, Vote = e.Votes });
@@ -44,26 +45,36 @@ namespace CodeRollProject.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Vote _vote) // ŞUAN Kİ VERSİYONDA _vote null dönüyor. 
+        public IActionResult Index(EventVoteViewModel _eventVoteViewModel) // ŞUAN Kİ VERSİYONDA _vote null dönüyor. 
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
             var user = context.Users.FirstOrDefault(u => u.Email == userEmail);
 
             var data = TempData["EventData"].ToString();
             var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
-
+         
             var vote = new Vote
             {
-                VoteOption = _vote.VoteOption,
-                ParticipantName = _vote.ParticipantName,                
-                EventID = currentEvent.EventID
+                EventID = currentEvent.EventID,
+                ParticipantName = _eventVoteViewModel.eventt.Votes.FirstOrDefault()?.ParticipantName
             };
 
-            if(vote == null)
+            if (vote != null)
             {
                 vm.TInsert(vote);
             }
-                       
+
+            foreach (var option in _eventVoteViewModel.voteOptionn)
+            {
+                var voteOption = new VoteOption
+                {
+                    VoteID = vote.VoteID,
+                    VoteValue = option.VoteValue 
+                };
+
+                vom.TInsert(voteOption);
+            }          
+
             context.SaveChanges();
 
             //return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });

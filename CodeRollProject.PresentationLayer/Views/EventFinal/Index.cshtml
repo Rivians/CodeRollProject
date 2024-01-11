@@ -11,25 +11,33 @@
             <div class="card-header">Choose Time</div>
             <div class="card-buttonS">
                 <form asp-action="Index" asp-controller="EventFinal" method="post" id="my-form">
-                    <lable>Name : </lable>
-                    <input />
-                    @foreach (var item in Model.votee)
-                    {
-                         <input type="text" asp-for="@item.ParticipantName"/>
-                    }                   
+                    <lable>Name : </lable>                 
+                    <input type="text" asp-for="eventt.Votes.FirstOrDefault().ParticipantName" />
                     <br />
-                    @if (Model.eventt.EventTime1 != null)
-                    {
-                        <input type="checkbox" name="selectedOption" value=@Model.eventt.EventTime1.ToString() /><span>@Model.eventt.EventTime1</span><br />
+@*                     @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0)
+ *@                    {
+                        <input type="checkbox" asp-for="voteOptionn[0].VoteValue" name="selectedOption" value=@Model.eventt.EventTime1.ToString() />
+
+                        <span>@Model.eventt.EventTime1</span>
+
+                        <br />
                     }
-                    @if (Model.eventt.EventTime2 != null)
-                    {
-                        <input type="checkbox" name="selectedOption" value="@Model.eventt.EventTime2.ToString()" /><span>@Model.eventt.EventTime2</span><br />
+@*                     @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0)
+ *@                    {
+                        <input type="checkbox" asp-for="voteOptionn[1].VoteValue" name="selectedOption" value="@Model.eventt.EventTime2.ToString()" />
+
+                        <span>@Model.eventt.EventTime2</span>
+
+                        <br />
                     }
-                    @if (Model.eventt.EventTime3 != null)
-                    {
-                        <input type="checkbox" name="selectedOption" value="@Model.eventt.EventTime3.ToString()" /><span>@Model.eventt.EventTime3</span><br />
-                    }                                     
+@*                     @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0)
+ *@                    {
+                        <input type="checkbox" asp-for="voteOptionn[2].VoteValue" name="selectedOption" value="@Model.eventt.EventTime3.ToString()" />
+
+                        <span>@Model.eventt.EventTime3</span>
+
+                        <br />
+                    }
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -55,11 +63,11 @@
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants</li>
                     <br />
-                    @if (Model.votee != null)
+                    @if (Model.voteOptionn != null)
                     {
-                        @foreach (var item in Model.votee)
+                        @foreach (var item in Model.voteOptionn)
                         {
-                             <span>İsim : @item.ParticipantName </span>
+                            <span>İsim : @item.Vote.ParticipantName </span>
                         }
                     }
                 </ul>

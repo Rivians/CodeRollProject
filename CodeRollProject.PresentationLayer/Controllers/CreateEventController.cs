@@ -21,6 +21,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
     public class CreateEventController : Controller
     {
         EventManager em = new EventManager(new EfEventRepository());
+
         UserEventViewModel viewModel = new UserEventViewModel();
         EventCreateValidator ecv = new EventCreateValidator();
 

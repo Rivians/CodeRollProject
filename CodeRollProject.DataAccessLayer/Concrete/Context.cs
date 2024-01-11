@@ -28,5 +28,6 @@ namespace CodeRollProject.DataAccessLayer.Concrete
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<VoteOption> VoteOptions { get; set; }
     }
 }

@@ -12,10 +12,10 @@ namespace CodeRollProject.EntityLayer.Concrete
 		[Key]
         public int VoteID { get; set; }
         public string? ParticipantName { get; set; }
-        public string? VoteOption { get; set; }
-        public int EventID { get; set; }
+        public int? EventID { get; set; }
 
 
         public virtual Event Event { get; set; }
+        public virtual List<VoteOption> VoteOptions { get; set; }
     }
 }
