@@ -11,33 +11,24 @@
             <div class="card-header">Choose Time</div>
             <div class="card-buttonS">
                 <form asp-action="Index" asp-controller="EventFinal" method="post" id="my-form">
-                    <lable>Name : </lable>                 
-                    <input type="text" asp-for="eventt.Votes.FirstOrDefault().ParticipantName" />
+                    <lable>Name : </lable>
+                    <input type="text" asp-for="participantName" />
                     <br />
-@*                     @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0)
- *@                    {
-                        <input type="checkbox" asp-for="voteOptionn[0].VoteValue" name="selectedOption" value=@Model.eventt.EventTime1.ToString() />
 
-                        <span>@Model.eventt.EventTime1</span>
+                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
+                    <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime1.ToString()" />
+                    <span>@Model.eventt.EventTime1</span>
+                    <br />
 
-                        <br />
-                    }
-@*                     @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0)
- *@                    {
-                        <input type="checkbox" asp-for="voteOptionn[1].VoteValue" name="selectedOption" value="@Model.eventt.EventTime2.ToString()" />
+                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
+                    <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime2.ToString()" />
+                    <span>@Model.eventt.EventTime2</span>
+                    <br />
 
-                        <span>@Model.eventt.EventTime2</span>
-
-                        <br />
-                    }
-@*                     @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0)
- *@                    {
-                        <input type="checkbox" asp-for="voteOptionn[2].VoteValue" name="selectedOption" value="@Model.eventt.EventTime3.ToString()" />
-
-                        <span>@Model.eventt.EventTime3</span>
-
-                        <br />
-                    }
+                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
+                    <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime3.ToString()" />
+                    <span>@Model.eventt.EventTime3</span>
+                    <br />
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -49,9 +40,6 @@
             <div class="card-list">
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Event Name : @Model.eventt.EventName </li>
-                    @* <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime1 </li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime2 </li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @Model.EventTime3 </li> *@
                     <li class="listItem"><i class="fa-solid fa-location-dot"></i>Event Platform : @Model.eventt.EventPlatform </li>
                     <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Event Description : @Model.eventt.EventDescription </li>
                 </ul>
@@ -63,11 +51,11 @@
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants</li>
                     <br />
-                    @if (Model.voteOptionn != null)
+                    @if (Model.eventt.Votes != null)
                     {
-                        @foreach (var item in Model.voteOptionn)
+                        @foreach (var item in Model.eventt.Votes)
                         {
-                            <span>İsim : @item.Vote.ParticipantName </span>
+                            <span>İsim : @item.ParticipantName </span>
                         }
                     }
                 </ul>

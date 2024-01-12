@@ -1,0 +1,19 @@
+// Event tablosundaki bir etkinliği, ona bağlı olan oy verenleri ve her oy verenin kullanıcı bilgilerini getirme
+var eventData = context.Events
+    .Include(e => e.Votes)
+        .ThenInclude(v => v.User)
+    .FirstOrDefault(e => e.EventID == eventId);
+
+// Event tablosundaki etkinliğin adını al
+string eventName = eventData.EventName;
+
+// Event tablosundaki etkinliğe bağlı olan oy verenlerin sayısını al
+int voteCount = eventData.Votes.Count;
+
+// Her bir oy verenin kullanıcı adını al
+foreach (var vote in eventData.Votes)
+{
+    string userName = vote.User.Name;
+    // Kullanıcı adını kullanarak yapmak istediğiniz işlemleri gerçekleştirin
+    // Örneğin, bu bilgileri bir ViewBag'e ekleyebilir veya bir model içinde kullanabilirsiniz.
+}

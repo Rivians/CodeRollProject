@@ -21,7 +21,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         EventVoteViewModel evwm = new EventVoteViewModel();
         Context context = new Context();
 
-        [HttpGet]
+        [HttpGet] // eventfinal da sağ tarafta ki participant kısmı şuanlık boş.
         public IActionResult Index(int eventid) 
         {
             //var data = TempData["eventid"].ToString();
@@ -31,12 +31,13 @@ namespace CodeRollProject.PresentationLayer.Controllers
             //var users = context.EventsUsers.Include(eu => eu.User).Where(eu2 => eu2.EventID == eventid).Select(eu3 => eu3.User);
             //ViewBag.Users = users;
 
-            var eventValue = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == eventid);
+            var eventValue = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == eventid);        
+            var eventParticipants = eventValue.Votes.ToList();
+            ViewBag.eventParticipants = eventParticipants;
 
             evwm = new EventVoteViewModel()
             {
-                eventt = eventValue,
-                voteOptionn = eventValue.Votes.SelectMany(v => v.VoteOptions).ToList(),                
+                eventt = eventValue        
             };
 
             //var eventDataWithVotes = context.Events.Where(e => e.EventID != eventid).Select(e => new { Event = e, Vote = e.Votes });
@@ -56,29 +57,39 @@ namespace CodeRollProject.PresentationLayer.Controllers
             var vote = new Vote
             {
                 EventID = currentEvent.EventID,
-                ParticipantName = _eventVoteViewModel.eventt.Votes.FirstOrDefault()?.ParticipantName
+                ParticipantName = _eventVoteViewModel.participantName
             };
 
             if (vote != null)
             {
                 vm.TInsert(vote);
+                context.SaveChanges();
             }
 
-            foreach (var option in _eventVoteViewModel.voteOptionn)
+            var voteS = context.Votes.Include(v => v.VoteOptions).FirstOrDefault(v => v.ParticipantName == _eventVoteViewModel.participantName);
+
+            for (int i = 0; i < _eventVoteViewModel.SelectedOption.Count; i++)
             {
-                var voteOption = new VoteOption
+                var voteOptionValue = _eventVoteViewModel.SelectedOption[i];
+
+                if(i < voteS.VoteOptions.Count)
                 {
-                    VoteID = vote.VoteID,
-                    VoteValue = option.VoteValue 
-                };
+                    voteS.VoteOptions[i].VoteValue = voteOptionValue;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    var newVoteOption = new VoteOption
+                    {
+                        VoteID = voteS.VoteID,
+                        VoteValue = voteOptionValue
+                    };
+                    vom.TInsert(newVoteOption);
+                    context.SaveChanges();
+                }
+            }
 
-                vom.TInsert(voteOption);
-            }          
-
-            context.SaveChanges();
-
-            //return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
-            return View(); // geçici
+            return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
         }
     }
 }
