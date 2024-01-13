@@ -9,5 +9,6 @@ namespace CodeRollProject.DataAccessLayer.Abstract
 {
     public interface IEventDal : IGenericDal<Event>
     { 
+        public Event GetEventById(int id);
     }
 }

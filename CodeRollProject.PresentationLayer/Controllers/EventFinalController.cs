@@ -13,15 +13,28 @@ namespace CodeRollProject.PresentationLayer.Controllers
     [Authorize]
     public class EventFinalController : Controller
     {
-        EventManager em = new EventManager(new EfEventRepository());
-        UserManager um = new UserManager(new EfUserRepository());
-        VoteManager vm = new VoteManager(new EfVoteRepository());
-        VoteOptionManager vom = new VoteOptionManager(new EfVoteOptionRepository());
+        //EventManager em = new EventManager(new EfEventRepository());
+        //UserManager um = new UserManager(new EfUserRepository());
+        //VoteManager vm = new VoteManager(new EfVoteRepository());
+        //VoteOptionManager vom = new VoteOptionManager(new EfVoteOptionRepository());
+
+        private readonly EventManager em;
+        private readonly UserManager um;
+        private readonly VoteManager vm;
+        private readonly VoteOptionManager vom;
 
         EventVoteViewModel evwm = new EventVoteViewModel();
         Context context = new Context();
 
-        [HttpGet] // eventfinal da sağ tarafta ki participant kısmı şuanlık boş.
+        public EventFinalController(EventManager eventManager, UserManager userManager, VoteManager voteManager, VoteOptionManager voteOptionManager)
+        {
+            em = eventManager;
+            um = userManager;
+            vm = voteManager;
+            vom = voteOptionManager;
+        }
+
+        [HttpGet] 
         public IActionResult Index(int eventid) 
         {
             //var data = TempData["eventid"].ToString();

@@ -9,5 +9,6 @@ namespace CodeRollProject.DataAccessLayer.Abstract
 {
     public interface IVoteDal : IGenericDal<Vote>
     {
+        public Vote GetVoteWithParticipantAndEventID(string participantName, int eventId);
     }
 }

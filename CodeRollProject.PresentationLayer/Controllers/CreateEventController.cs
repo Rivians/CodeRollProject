@@ -1,4 +1,5 @@
-﻿using CodeRollProject.BusinessLayer.Concrete;
+﻿using CodeRollProject.BusinessLayer.Abstract;
+using CodeRollProject.BusinessLayer.Concrete;
 using CodeRollProject.BusinessLayer.ValidationRules;
 using CodeRollProject.DataAccessLayer.Concrete;
 using CodeRollProject.DataAccessLayer.EntityFramework;
@@ -20,7 +21,13 @@ namespace CodeRollProject.PresentationLayer.Controllers
     [Authorize]
     public class CreateEventController : Controller
     {
-        EventManager em = new EventManager(new EfEventRepository());
+        private readonly IEventService em;
+        public CreateEventController(IEventService eventManager)
+        {
+            em = eventManager;
+        }
+
+        //EventManager em = new EventManager(new EfEventRepository());
 
         UserEventViewModel viewModel = new UserEventViewModel();
         EventCreateValidator ecv = new EventCreateValidator();

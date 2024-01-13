@@ -1,3 +1,8 @@
+using CodeRollProject.BusinessLayer.Abstract;
+using CodeRollProject.BusinessLayer.Concrete;
+using CodeRollProject.DataAccessLayer.Abstract;
+using CodeRollProject.DataAccessLayer.Concrete;
+using CodeRollProject.DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -16,10 +21,11 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 {
 	options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
-//builder.Services.AddControllers().AddJsonOptions(x =>
-//					x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddSession();
 
+builder.Services.AddScoped<Context>();
+builder.Services.AddScoped<IEventDal,EfEventRepository>();
+builder.Services.AddScoped<IEventService, EventManager>();
+builder.Services.AddSession();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
