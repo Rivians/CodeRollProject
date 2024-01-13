@@ -50,7 +50,9 @@
             <div class="card-list">
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Event Name : @ViewBag.Event.EventName </li>
-                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @ViewBag.Event.EventTime </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @ViewBag.Event.EventTime1 </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @ViewBag.Event.EventTime2 </li>
+                    <li class="listItem"><i class="fa-solid fa-calendar-days"></i>Event Date : @ViewBag.Event.EventTime3 </li>
                     <li class="listItem"><i class="fa-solid fa-location-dot"></i>Event Platform : @ViewBag.Event.EventPlatform </li>
                     <li class="listItem" style="height:120px"><i class="fa-solid fa-square-plus"></i>Event Description : @ViewBag.Event.EventDescription </li>
                 </ul>
@@ -60,17 +62,17 @@
         <div class="card">
             <div class="card-list">
                 <ul class="list">
-                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants</li>
+                    <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants/Votes</li>
                     <br />
-                    @* @if (ViewBag.Users != null)
-                    { *@
+@*                     @if (ViewBag.Users != null)
+                    { 
                     @foreach (var item in Model.Users)
                     {
                         @item.Name
-@*                         <span> = </span> @item.Votes.Select(v => v.VoteOption).FirstOrDefault()
- *@                        <br />
+                         <span> = </span> @item.Votes.Select(v => v.VoteOption).FirstOrDefault()
+                         <br />
                     }
-                    @*  } *@
+                    } *@
                 </ul>
             </div>
         </div>
@@ -80,6 +82,6 @@
  *@        @* <input type="email">
         <button type="submit">Gönder</button> *@
         <label>Event Link : </label>
-        <a href="#">@ViewBag.Event.EventFullUrl</a>
+        <a href="@ViewBag.EventFullUrl">@ViewBag.Event.EventFullUrl</a>
     </div>
 </main>

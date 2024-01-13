@@ -24,12 +24,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
         [HttpGet]
         public IActionResult Index(int eventid)
         {
-            //var data = TempData["eventDatas"].ToString();
-            //var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
-            //ViewBag.Event = currentEvent;
-
             var currentEvent = context.Events.FirstOrDefault(e => e.EventID == eventid);
             ViewBag.Event = currentEvent;
+            ViewBag.EventFullUrl = currentEvent.EventFullUrl;
 
             var value = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).Where(e => e.EventID == eventid).FirstOrDefault();  // henüz denenmedi, ilk önce eventFinal'ı hallet !!
 

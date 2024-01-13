@@ -16,19 +16,30 @@
                     <br />
 
                     @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
-                    <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime1.ToString()" />
-                    <span>@Model.eventt.EventTime1</span>
-                    <br />
+                    @if (Model.eventt.EventTime1 != null)
+                    {
+                        <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime1.ToString()" />
+                        <span>@Model.eventt.EventTime1</span>
+                        <br />
+                    }
+
+                    
+                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
+                    @if (Model.eventt.EventTime2 != null)
+                    {
+                        <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime2.ToString()" />
+                        <span>@Model.eventt.EventTime2</span>
+                        <br />
+                    }
+                    
 
                     @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
-                    <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime2.ToString()" />
-                    <span>@Model.eventt.EventTime2</span>
-                    <br />
-
-                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
-                    <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime3.ToString()" />
-                    <span>@Model.eventt.EventTime3</span>
-                    <br />
+                    @if (Model.eventt.EventTime3 != null)
+                    {
+                        <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime3.ToString()" />
+                        <span>@Model.eventt.EventTime3</span>
+                        <br />
+                    }
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -56,6 +67,9 @@
                         @foreach (var item in Model.eventt.Votes)
                         {
                             <span>İsim : @item.ParticipantName </span>
+                            <br />
+                            <br />
+                            
                         }
                     }
                 </ul>

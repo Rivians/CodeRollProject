@@ -90,6 +90,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
             }
 
             return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
+            //return View();
         }
     }
 }
