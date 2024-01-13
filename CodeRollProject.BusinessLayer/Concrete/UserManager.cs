@@ -14,11 +14,13 @@ namespace CodeRollProject.BusinessLayer.Concrete
 	public class UserManager : IUserService
 	{
 		IUserDal _userDal;
-
 		public UserManager(IUserDal userDal)
 		{
 			_userDal = userDal;
 		}
+
+
+
 
 		public void TDelete(User user)
 		{
@@ -40,7 +42,12 @@ namespace CodeRollProject.BusinessLayer.Concrete
 			throw new NotImplementedException();
 		}
 
-		public void TInsert(User user)
+        public User TGetUserByEmail(string email)
+        {
+            return _userDal.GetUserByEmail(email);
+        }
+
+        public void TInsert(User user)
 		{
 			_userDal.Insert(user);
 		}

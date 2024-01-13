@@ -74,6 +74,11 @@ namespace CodeRollProject.BusinessLayer.Concrete
             return _eventDal.GetByID(id);
         }
 
+        public Event TGetEventById(int eventId)
+        {
+            return _eventDal.GetEventById(eventId);
+        }
+
         public List<Event> TGetListAll()
         {
             return _eventDal.GetListAll();

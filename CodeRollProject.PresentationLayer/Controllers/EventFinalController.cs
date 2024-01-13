@@ -1,4 +1,6 @@
-﻿using CodeRollProject.BusinessLayer.Concrete;
+﻿using CodeRollProject.BusinessLayer.Abstract;
+using CodeRollProject.BusinessLayer.Concrete;
+using CodeRollProject.BusinessLayer.ValidationRules;
 using CodeRollProject.DataAccessLayer.Concrete;
 using CodeRollProject.DataAccessLayer.EntityFramework;
 using CodeRollProject.EntityLayer.Concrete;
@@ -13,20 +15,11 @@ namespace CodeRollProject.PresentationLayer.Controllers
     [Authorize]
     public class EventFinalController : Controller
     {
-        //EventManager em = new EventManager(new EfEventRepository());
-        //UserManager um = new UserManager(new EfUserRepository());
-        //VoteManager vm = new VoteManager(new EfVoteRepository());
-        //VoteOptionManager vom = new VoteOptionManager(new EfVoteOptionRepository());
-
-        private readonly EventManager em;
-        private readonly UserManager um;
-        private readonly VoteManager vm;
-        private readonly VoteOptionManager vom;
-
-        EventVoteViewModel evwm = new EventVoteViewModel();
-        Context context = new Context();
-
-        public EventFinalController(EventManager eventManager, UserManager userManager, VoteManager voteManager, VoteOptionManager voteOptionManager)
+        private readonly IEventService em;
+        private readonly IUserService um;
+        private readonly IVoteService vm;
+        private readonly IVoteOptionService vom;
+        public EventFinalController(IEventService eventManager, IUserService userManager, IVoteService voteManager, IVoteOptionService voteOptionManager)
         {
             em = eventManager;
             um = userManager;
@@ -34,17 +27,14 @@ namespace CodeRollProject.PresentationLayer.Controllers
             vom = voteOptionManager;
         }
 
+        EventVoteViewModel evwm = new EventVoteViewModel();
+        ChooseAvailabilityValidator cav = new ChooseAvailabilityValidator();
+
         [HttpGet] 
         public IActionResult Index(int eventid) 
         {
-            //var data = TempData["eventid"].ToString();
-            //var eventId = System.Text.Json.JsonSerializer.Deserialize<int>(data);
-
-            //Event value = context.Events.FirstOrDefault(e => e.EventID == eventid);
-            //var users = context.EventsUsers.Include(eu => eu.User).Where(eu2 => eu2.EventID == eventid).Select(eu3 => eu3.User);
-            //ViewBag.Users = users;
-
-            var eventValue = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == eventid);        
+            var eventValue = em.TGetEventById(eventid);
+            //var eventValue = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == eventid);        
             var eventParticipants = eventValue.Votes.ToList();
             ViewBag.eventParticipants = eventParticipants;
 
@@ -53,20 +43,18 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 eventt = eventValue        
             };
 
-            //var eventDataWithVotes = context.Events.Where(e => e.EventID != eventid).Select(e => new { Event = e, Vote = e.Votes });
-            //return View(value);
             return View(evwm);
         }
 
         [HttpPost]
-        public IActionResult Index(EventVoteViewModel _eventVoteViewModel) // ŞUAN Kİ VERSİYONDA _vote null dönüyor. 
+        public IActionResult Index(EventVoteViewModel _eventVoteViewModel)  
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var user = context.Users.FirstOrDefault(u => u.Email == userEmail);
+            var user = um.TGetUserByEmail(userEmail);
 
             var data = TempData["EventData"].ToString();
             var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
-         
+
             var vote = new Vote
             {
                 EventID = currentEvent.EventID,
@@ -76,10 +64,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
             if (vote != null)
             {
                 vm.TInsert(vote);
-                context.SaveChanges();
             }
 
-            var voteS = context.Votes.Include(v => v.VoteOptions).FirstOrDefault(v => v.ParticipantName == _eventVoteViewModel.participantName);
+            var voteS = vm.TGetVoteByParticipantAndEventID(_eventVoteViewModel.participantName, currentEvent.EventID);
 
             for (int i = 0; i < _eventVoteViewModel.SelectedOption.Count; i++)
             {
@@ -88,7 +75,6 @@ namespace CodeRollProject.PresentationLayer.Controllers
                 if(i < voteS.VoteOptions.Count)
                 {
                     voteS.VoteOptions[i].VoteValue = voteOptionValue;
-                    context.SaveChanges();
                 }
                 else
                 {
@@ -98,12 +84,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
                         VoteValue = voteOptionValue
                     };
                     vom.TInsert(newVoteOption);
-                    context.SaveChanges();
                 }
             }
-
             return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
-            //return View();
         }
     }
 }

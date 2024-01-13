@@ -9,5 +9,6 @@ namespace CodeRollProject.BusinessLayer.Abstract
 {
     public interface IVoteService : IGenericService<Vote>
     {
+        public Vote TGetVoteByParticipantAndEventID(string participantName, int eventId);
     }
 }

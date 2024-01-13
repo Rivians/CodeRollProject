@@ -7,14 +7,21 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CodeRollProject.BusinessLayer.ValidationRules;
+using CodeRollProject.BusinessLayer.Abstract;
 
 namespace CodeRollProject.PresentationLayer.Controllers
 {
 	[AllowAnonymous]
 	public class RegisterController : Controller
 	{
-		UserManager um = new UserManager(new EfUserRepository());
+		private readonly IUserService um;
+        public RegisterController(IUserService userManager)
+        {
+            um = userManager;
+        }
+
         UserRegisterValidator urv = new UserRegisterValidator();
+
 
         [HttpGet]
 		public IActionResult Index()

@@ -24,7 +24,13 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 
 builder.Services.AddScoped<Context>();
 builder.Services.AddScoped<IEventDal,EfEventRepository>();
+builder.Services.AddScoped<IUserDal,EfUserRepository>();
+builder.Services.AddScoped<IVoteDal,EfVoteRepository>();
+builder.Services.AddScoped<IVoteOptionDal,EfVoteOptionRepository>();
 builder.Services.AddScoped<IEventService, EventManager>();
+builder.Services.AddScoped<IUserService, UserManager>();
+builder.Services.AddScoped<IVoteService, VoteManager>();
+builder.Services.AddScoped<IVoteOptionService, VoteOptionManager>();
 builder.Services.AddSession();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>

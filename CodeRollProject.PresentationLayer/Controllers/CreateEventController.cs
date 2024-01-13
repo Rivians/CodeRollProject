@@ -22,22 +22,23 @@ namespace CodeRollProject.PresentationLayer.Controllers
     public class CreateEventController : Controller
     {
         private readonly IEventService em;
-        public CreateEventController(IEventService eventManager)
+        private readonly IUserService um;
+
+
+        UserEventViewModel viewModel = new UserEventViewModel();            // normalde bu kısımlarında Dependecy Injection ile enjekte edilmesi gerekiyor. Ama şuanlik saldık.
+        EventCreateValidator ecv = new EventCreateValidator();              // normalde bu kısımlarında Dependecy Injection ile enjekte edilmesi gerekiyor. Ama şuanlik saldık.
+
+        public CreateEventController(IEventService eventManager, IUserService userManager)
         {
             em = eventManager;
+            um = userManager;
         }
-
-        //EventManager em = new EventManager(new EfEventRepository());
-
-        UserEventViewModel viewModel = new UserEventViewModel();
-        EventCreateValidator ecv = new EventCreateValidator();
 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-
 
         [HttpPost]
         public IActionResult Index(Event _event)
@@ -46,22 +47,19 @@ namespace CodeRollProject.PresentationLayer.Controllers
             
             if (_event != null && result.IsValid)
             {
-                var userEmail = User.FindFirstValue(ClaimTypes.Email);  // login yapan user'in emailini aldık
-
-                Context context = new Context();
-                var user = context.Users.FirstOrDefault(x => x.Email == userEmail);
-                _event.UserID = user.UserID;  // eventi oluştaranın kim oldugunu belirttik.
+                var userEmail = User.FindFirstValue(ClaimTypes.Email);                                           // login yapan user'in emailini aldık
+                var user = um.TGetUserByEmail(userEmail);
+                _event.UserID = user.UserID;                                                                     // eventi oluştaranın kim oldugunu belirttik.
 
                 em.TInsert(_event);
                 _event.EventUrl = em.GenerateRandomUrl() + "?eventid=" + _event.EventID.ToString();
                 _event.EventFullUrl = "/EventFinal/Index/" + _event.EventUrl;
                 em.TUpdate(_event);
-                context.SaveChanges();
 
                 string jsonString2 = System.Text.Json.JsonSerializer.Serialize(_event);
                 TempData["EventData"] = jsonString2;
 
-                HttpContext.Session.SetString("EventData", JsonConvert.SerializeObject(_event));  // _event'in tüm verilerini EventData isminde bir Key'e atadık. Bu keyde Sessionda tutuluyor.
+                HttpContext.Session.SetString("EventData", JsonConvert.SerializeObject(_event));                  // _event'in tüm verilerini EventData isminde bir Key'e atadık. Bu keyde Sessionda tutuluyor.
 
                 return RedirectToAction("Index", "EventFinal", new { id = _event.EventUrl, eventid = _event.EventID } );
             }

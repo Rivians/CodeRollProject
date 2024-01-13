@@ -20,6 +20,7 @@ namespace CodeRollProject.BusinessLayer.Concrete
 
 
 
+
         public void TDelete(VoteOption t)
         {
             _voteOptionDal.Delete(t);

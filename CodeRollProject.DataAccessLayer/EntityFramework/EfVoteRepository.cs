@@ -19,7 +19,7 @@ namespace CodeRollProject.DataAccessLayer.EntityFramework
             this.context = context;
         }
 
-        public Vote GetVoteWithParticipantAndEventID(string participantName, int eventId)
+        public Vote GetVoteByParticipantAndEventID(string participantName, int eventId)
         {
             return context.Votes.Include(v => v.VoteOptions).FirstOrDefault(v => v.ParticipantName == participantName && v.EventID == eventId);
         }

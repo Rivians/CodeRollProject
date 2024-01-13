@@ -13,7 +13,6 @@ namespace CodeRollProject.BusinessLayer.Concrete
     public class VoteManager : IVoteService
     {
         IVoteDal _voteDal;
-
         public VoteManager(IVoteDal voteDal)
         {
             _voteDal = voteDal;
@@ -40,6 +39,11 @@ namespace CodeRollProject.BusinessLayer.Concrete
         public List<Vote> TGetListAll(Expression<Func<Vote, bool>> filter)
         {
             throw new NotImplementedException();
+        }
+
+        public Vote TGetVoteByParticipantAndEventID(string participantName, int eventId)
+        {
+            return _voteDal.GetVoteByParticipantAndEventID(participantName, eventId);
         }
 
         public void TInsert(Vote t)

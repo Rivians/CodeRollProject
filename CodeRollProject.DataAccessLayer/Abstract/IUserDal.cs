@@ -9,5 +9,6 @@ namespace CodeRollProject.DataAccessLayer.Abstract
 {
 	public interface IUserDal : IGenericDal<User>
 	{
+		User GetUserByEmail(string email);
 	}
 }

@@ -10,7 +10,7 @@ namespace CodeRollProject.EntityLayer.Concrete
     {
         public int VoteOptionID { get; set; }
         public string? VoteValue { get; set; }
-        public bool? IsSelected { get; set; }
+        public bool? IsSelected { get; set; } // şuanda kullanılmıyor
 
 
         public int VoteID { get; set; }

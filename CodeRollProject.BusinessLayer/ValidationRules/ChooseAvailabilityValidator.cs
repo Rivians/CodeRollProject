@@ -12,7 +12,7 @@ namespace CodeRollProject.BusinessLayer.ValidationRules
     {
         public ChooseAvailabilityValidator()
         {
-            //RuleFor(x => x.VoteOption).NotEmpty().WithMessage("Lütfen müsaitlik durumunuzu belirtiniz.");
+            //RuleFor(x => x.VoteOptions).NotEmpty().WithMessage("Lütfen en az 1 seçeneği işaretleyiniz.");
         }
     }
 }

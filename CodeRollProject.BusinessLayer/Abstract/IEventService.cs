@@ -9,6 +9,7 @@ namespace CodeRollProject.BusinessLayer.Abstract
 {
     public interface IEventService : IGenericService<Event>
     {
+        public Event TGetEventById(int eventId);
         public string GenerateRandomUrl();
         public string GenerateFullUrl();  // controller ve action'ın da url içine katılması lazım
     }

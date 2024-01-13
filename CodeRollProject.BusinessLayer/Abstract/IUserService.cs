@@ -9,6 +9,7 @@ namespace CodeRollProject.BusinessLayer.Abstract
 {
 	public interface IUserService : IGenericService<User>
 	{
-        
+        public User TGetUserByEmail(string email);
+
     }
 }
