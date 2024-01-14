@@ -15,7 +15,6 @@
                     <input type="text" asp-for="participantName" />
                     <br />
 
-                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
                     @if (Model.eventt.EventTime1 != null)
                     {
                         <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime1.ToString()" />
@@ -23,8 +22,6 @@
                         <br />
                     }
 
-                    
-                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
                     @if (Model.eventt.EventTime2 != null)
                     {
                         <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime2.ToString()" />
@@ -32,8 +29,6 @@
                         <br />
                     }
                     
-
-                    @* @if (Model.voteOptionn != null && Model.voteOptionn.Count > 0) *@
                     @if (Model.eventt.EventTime3 != null)
                     {
                         <input type="checkbox" name="SelectedOption" value="@Model.eventt.EventTime3.ToString()" />

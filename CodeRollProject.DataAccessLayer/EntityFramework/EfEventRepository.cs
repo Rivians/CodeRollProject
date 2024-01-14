@@ -24,5 +24,10 @@ namespace CodeRollProject.DataAccessLayer.EntityFramework
         {
             return context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == id);
         }
+
+        public List<Event> GetLast5EventByUserId(int userId)
+        {
+            return context.Events.Where(e => e.UserID == userId).OrderByDescending(e => e.EventID).Take(5).ToList();
+        }
     }
 }

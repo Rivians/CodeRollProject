@@ -64,15 +64,107 @@
                 <ul class="list">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants/Votes</li>
                     <br />
-@*                     @if (ViewBag.Users != null)
-                    { 
-                    @foreach (var item in Model.Users)
-                    {
-                        @item.Name
-                         <span> = </span> @item.Votes.Select(v => v.VoteOption).FirstOrDefault()
-                         <br />
-                    }
-                    } *@
+                    <table>
+                        <thead>
+                            @if(Model.eventt.EventTime1 != null)
+                            {
+                            <th style="border: 1px solid; padding: 5px">@Model.eventt.EventTime1</th>
+                            }
+                            @if (Model.eventt.EventTime2 != null)
+                            {
+                            <th style="border: 1px solid; padding: 5px">@Model.eventt.EventTime2</th>
+                            }
+                            @if (Model.eventt.EventTime3 != null)
+                            {
+                            <th style="border: 1px solid; padding: 5px">@Model.eventt.EventTime3</th>
+                            }
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.votess)
+                            {
+                                <tr>
+                                    @foreach (var eventTime in new[] { Model.eventt.EventTime1, Model.eventt.EventTime2, Model.eventt.EventTime3 })
+                                    {
+                                        <td>
+                                            @if (item.VoteOptions.Count > 0)
+                                            {
+                                                var voteOption = item.VoteOptions.FirstOrDefault(vo => vo?.VoteValue == eventTime.ToString());
+                                                if (voteOption != null)
+                                                {
+                                                    <span>@item.ParticipantName</span>
+                                                }
+                                                else
+                                                {
+                                                    <span> --- </span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span> --- </span>
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+                            }
+
+@*                             @foreach (var item in Model.votess)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (item.VoteOptions.Count > 0)
+                                        {
+                                            @if (item.VoteOptions[0] != null && item.VoteOptions[0].VoteValue == Model.eventt.EventTime1.ToString())
+                                            {
+                                                <span>@item.ParticipantName</span>
+                                            }
+                                            else
+                                            {
+                                                <span> --- </span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span> --- </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.VoteOptions.Count > 1)
+                                        {
+                                            @if (item.VoteOptions[1] != null && item.VoteOptions[1].VoteValue == Model.eventt.EventTime2.ToString())
+                                            {
+                                                <span>@item.ParticipantName</span>
+                                            }
+                                            else
+                                            {
+                                                <span> --- </span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span> --- </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.VoteOptions.Count > 2)
+                                        {
+                                            @if (item.VoteOptions[2] != null && item.VoteOptions[2].VoteValue == Model.eventt.EventTime3.ToString())
+                                            {
+                                                <span>@item.ParticipantName</span>
+                                            }
+                                            else
+                                            {
+                                                <span> --- </span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span> --- </span>
+                                        }
+                                    </td>
+                                </tr>
+                            } *@
+                        </tbody>
+                    </table>
                 </ul>
             </div>
         </div>

@@ -16,21 +16,18 @@ namespace CodeRollProject.DataAccessLayer.Repositories
 			using var context = new Context();
 			context.Set<T>().Remove(t);
 			context.SaveChanges();
-
 		}
 
 		public T GetByID(int id)
 		{
 			using var context = new Context();
 			return context.Set<T>().Find(id);
-			
 		}
 
 		public List<T> GetListAll()
 		{
 			using var context = new Context();
-			return context.Set<T>().ToList();
-			
+			return context.Set<T>().ToList();			
 		}
 
 		public List<T> GetListAll(Expression<Func<T, bool>> filter)  //  daha sonra kullanılacak. ****************************

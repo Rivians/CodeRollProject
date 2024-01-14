@@ -79,6 +79,11 @@ namespace CodeRollProject.BusinessLayer.Concrete
             return _eventDal.GetEventById(eventId);
         }
 
+        public List<Event> TGetLast5EventByUserId(int userId)
+        {
+            return _eventDal.GetLast5EventByUserId(userId);
+        }
+
         public List<Event> TGetListAll()
         {
             return _eventDal.GetListAll();

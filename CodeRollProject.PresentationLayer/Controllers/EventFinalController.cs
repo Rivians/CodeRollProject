@@ -34,7 +34,6 @@ namespace CodeRollProject.PresentationLayer.Controllers
         public IActionResult Index(int eventid) 
         {
             var eventValue = em.TGetEventById(eventid);
-            //var eventValue = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).FirstOrDefault(e => e.EventID == eventid);        
             var eventParticipants = eventValue.Votes.ToList();
             ViewBag.eventParticipants = eventParticipants;
 
@@ -55,38 +54,45 @@ namespace CodeRollProject.PresentationLayer.Controllers
             var data = TempData["EventData"].ToString();
             var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
 
-            var vote = new Vote
+            if(_eventVoteViewModel.participantName != null && _eventVoteViewModel.SelectedOption != null)
             {
-                EventID = currentEvent.EventID,
-                ParticipantName = _eventVoteViewModel.participantName
-            };
-
-            if (vote != null)
-            {
-                vm.TInsert(vote);
-            }
-
-            var voteS = vm.TGetVoteByParticipantAndEventID(_eventVoteViewModel.participantName, currentEvent.EventID);
-
-            for (int i = 0; i < _eventVoteViewModel.SelectedOption.Count; i++)
-            {
-                var voteOptionValue = _eventVoteViewModel.SelectedOption[i];
-
-                if(i < voteS.VoteOptions.Count)
+                var vote = new Vote
                 {
-                    voteS.VoteOptions[i].VoteValue = voteOptionValue;
+                    EventID = currentEvent.EventID,
+                    ParticipantName = _eventVoteViewModel.participantName
+                };
+
+                if (vote != null)
+                {
+                    vm.TInsert(vote);
                 }
-                else
+
+                var voteS = vm.TGetVoteByParticipantAndEventID(_eventVoteViewModel.participantName, currentEvent.EventID);
+
+                for (int i = 0; i < _eventVoteViewModel.SelectedOption.Count; i++)
                 {
-                    var newVoteOption = new VoteOption
+                    var voteOptionValue = _eventVoteViewModel.SelectedOption[i];
+
+                    if (i < voteS.VoteOptions.Count)
                     {
-                        VoteID = voteS.VoteID,
-                        VoteValue = voteOptionValue
-                    };
-                    vom.TInsert(newVoteOption);
+                        voteS.VoteOptions[i].VoteValue = voteOptionValue;
+                    }
+                    else
+                    {
+                        var newVoteOption = new VoteOption
+                        {
+                            VoteID = voteS.VoteID,
+                            VoteValue = voteOptionValue
+                        };
+                        vom.TInsert(newVoteOption);
+                    }
                 }
+                return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
             }
-            return RedirectToAction("Index", "EventSummary", new { id = currentEvent.EventUrl, eventid = currentEvent.EventID });
+            else
+            {
+                return View();
+            }
         }
     }
 }

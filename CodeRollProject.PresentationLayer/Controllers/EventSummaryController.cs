@@ -37,9 +37,8 @@ namespace CodeRollProject.PresentationLayer.Controllers
             ViewBag.Event = currentEvent;
             ViewBag.EventFullUrl = currentEvent.EventFullUrl;
 
-            var value = context.Events.Include(e => e.Votes).ThenInclude(e => e.VoteOptions).Where(e => e.EventID == eventid).FirstOrDefault();  // henüz denenmedi, ilk önce eventFinal'ı hallet !!
-
-            _eventSummaryViewModel.Votes = value.Votes.ToList();  // henüz denenmedi, ilk önce eventFinal'ı hallet !!
+            _eventSummaryViewModel.eventt = currentEvent;
+            _eventSummaryViewModel.votess = currentEvent.Votes.ToList();  
 
             return View(_eventSummaryViewModel);
         }

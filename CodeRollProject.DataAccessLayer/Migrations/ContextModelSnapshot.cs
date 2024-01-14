@@ -61,7 +61,7 @@ namespace CodeRollProject.DataAccessLayer.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.User", b =>
@@ -86,7 +86,7 @@ namespace CodeRollProject.DataAccessLayer.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.Vote", b =>
@@ -107,7 +107,7 @@ namespace CodeRollProject.DataAccessLayer.Migrations
 
                     b.HasIndex("EventID");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Votes", (string)null);
                 });
 
             modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.VoteOption", b =>
@@ -131,7 +131,7 @@ namespace CodeRollProject.DataAccessLayer.Migrations
 
                     b.HasIndex("VoteID");
 
-                    b.ToTable("VoteOptions");
+                    b.ToTable("VoteOptions", (string)null);
                 });
 
             modelBuilder.Entity("CodeRollProject.EntityLayer.Concrete.Event", b =>

@@ -1,4 +1,6 @@
-﻿
+﻿@using CodeRollProject.EntityLayer.Concrete
+@model List<Event>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -15,15 +17,17 @@
         </div>
         <div class="card">
             <div class="card-writing">
-                <p>Schedule an event for your team and make your colleagues mark availability.</p>
+                <h3>Your Last 5 Event </h3>
             </div>
             <div class="card-list">
                 <ul class="list">
-                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Choose the time you want.</li>
-                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 2</li>
-                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 3</li>
-                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 4</li>
-                    <li class="listItem"><i class="fa-solid fa-business-time"></i>Özellik 5</li>
+                    @foreach (var item in Model)
+                    {
+                        <li class="listItem">
+                            <i class="fa-solid fa-business-time"></i><a href="/EventSummary/Index/@item.EventUrl">@item.EventName</a>
+                            <a class="btn btn-danger" href="/Dashboard/DeleteEvent/@item.EventID">Delete</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
