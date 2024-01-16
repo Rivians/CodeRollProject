@@ -23,16 +23,14 @@ namespace CodeRollProject.PresentationLayer.Controllers
     {
         private readonly IEventService em;
         private readonly IUserService um;
-
-
-        UserEventViewModel viewModel = new UserEventViewModel();            // normalde bu kısımlarında Dependecy Injection ile enjekte edilmesi gerekiyor. Ama şuanlik saldık.
-        EventCreateValidator ecv = new EventCreateValidator();              // normalde bu kısımlarında Dependecy Injection ile enjekte edilmesi gerekiyor. Ama şuanlik saldık.
-
         public CreateEventController(IEventService eventManager, IUserService userManager)
         {
             em = eventManager;
             um = userManager;
         }
+
+        UserEventViewModel viewModel = new UserEventViewModel();            // normalde bu kısımlarında Dependecy Injection ile enjekte edilmesi gerekiyor. Ama şuanlik saldık.
+        EventCreateValidator ecv = new EventCreateValidator();              // normalde bu kısımlarında Dependecy Injection ile enjekte edilmesi gerekiyor. Ama şuanlik saldık.
 
         [HttpGet]
         public IActionResult Index()

@@ -61,22 +61,38 @@
         <br />
         <div class="card">
             <div class="card-list">
-                <ul class="list">
+                <ul class="list" style="padding:0">
                     <li class="listItem"><i class="fa-solid fa-address-card"></i>Participants/Votes</li>
                     <br />
-                    <table>
+                    <table @* style="margin-right:15px" *@>
                         <thead>
-                            @if(Model.eventt.EventTime1 != null)
+                            @if (Model.eventt.EventTime1 != null)
                             {
                             <th style="border: 1px solid; padding: 5px">@Model.eventt.EventTime1</th>
                             }
+                            @if (Model.eventt.EventTime1 == null)
+                            {
+                            <th style="border: 1px solid; padding: 5px">X X X X X X X X X X X X</th>
+                            }
+
+
                             @if (Model.eventt.EventTime2 != null)
                             {
                             <th style="border: 1px solid; padding: 5px">@Model.eventt.EventTime2</th>
                             }
+                            @if (Model.eventt.EventTime2 == null)
+                            {
+                            <th style="border: 1px solid; padding: 5px">X X X X X X X X X X X X</th>
+                            }
+
+
                             @if (Model.eventt.EventTime3 != null)
                             {
                             <th style="border: 1px solid; padding: 5px">@Model.eventt.EventTime3</th>
+                            }
+                            @if (Model.eventt.EventTime3 == null)
+                            {
+                            <th style="border: 1px solid; padding: 5px">X X X X X X X X X X X X</th>
                             }
                         </thead>
                         <tbody>
@@ -85,7 +101,7 @@
                                 <tr>
                                     @foreach (var eventTime in new[] { Model.eventt.EventTime1, Model.eventt.EventTime2, Model.eventt.EventTime3 })
                                     {
-                                        <td>
+                                        <td style="text-align:center">
                                             @if (item.VoteOptions.Count > 0)
                                             {
                                                 var voteOption = item.VoteOptions.FirstOrDefault(vo => vo?.VoteValue == eventTime.ToString());
@@ -106,73 +122,41 @@
                                     }
                                 </tr>
                             }
-
-@*                             @foreach (var item in Model.votess)
-                            {
-                                <tr>
-                                    <td>
-                                        @if (item.VoteOptions.Count > 0)
-                                        {
-                                            @if (item.VoteOptions[0] != null && item.VoteOptions[0].VoteValue == Model.eventt.EventTime1.ToString())
-                                            {
-                                                <span>@item.ParticipantName</span>
-                                            }
-                                            else
-                                            {
-                                                <span> --- </span>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <span> --- </span>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (item.VoteOptions.Count > 1)
-                                        {
-                                            @if (item.VoteOptions[1] != null && item.VoteOptions[1].VoteValue == Model.eventt.EventTime2.ToString())
-                                            {
-                                                <span>@item.ParticipantName</span>
-                                            }
-                                            else
-                                            {
-                                                <span> --- </span>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <span> --- </span>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (item.VoteOptions.Count > 2)
-                                        {
-                                            @if (item.VoteOptions[2] != null && item.VoteOptions[2].VoteValue == Model.eventt.EventTime3.ToString())
-                                            {
-                                                <span>@item.ParticipantName</span>
-                                            }
-                                            else
-                                            {
-                                                <span> --- </span>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <span> --- </span>
-                                        }
-                                    </td>
-                                </tr>
-                            } *@
                         </tbody>
+                        <tfoot style="text-align:center">
+                            @if (Model.eventt.EventTime1 != null)
+                            {
+                            <td style="color:blue">@Model.vote1Count vote</td>
+                            }
+                            else
+                            {
+                            <td>---</td>
+                            }
+
+                            @if (Model.eventt.EventTime2 != null)
+                            {
+                            <td style="color:blue">@Model.vote2Count vote</td>
+                            }
+                            else
+                            {
+                            <td>---</td>
+                            }
+
+                            @if (Model.eventt.EventTime3 != null)
+                            {
+                            <td style="color:blue">@Model.vote3Count vote</td>
+                            }
+                            else
+                            {
+                            <td>---</td>
+                            }
+                        </tfoot>
                     </table>
                 </ul>
             </div>
         </div>
-    </div>       
+    </div>
     <div class="text-container">
-@*         <label>Event Link : @ViewBag.Event.EventFullUrl </label>
- *@        @* <input type="email">
-        <button type="submit">Gönder</button> *@
         <label>Event Link : </label>
         <a href="@ViewBag.EventFullUrl">@ViewBag.Event.EventFullUrl</a>
     </div>

@@ -15,15 +15,19 @@ using System.Security.Claims;
 
 namespace CodeRollProject.PresentationLayer.Controllers
 {
+    [AllowAnonymous]
     [Authorize]
     public class EventSummaryController : Controller
     {
         private readonly IUserService um;
         private readonly IEventService em;
-        public EventSummaryController(IUserService userManager, IEventService eventManager)
+        private readonly IVoteService vm;
+        Context c = new Context();
+        public EventSummaryController(IUserService userManager, IEventService eventManager, IVoteService voteManager)
         {
             um = userManager;
             em = eventManager;
+            vm = voteManager;
         }
 
         EventSummaryViewModel _eventSummaryViewModel = new EventSummaryViewModel();
@@ -38,7 +42,11 @@ namespace CodeRollProject.PresentationLayer.Controllers
             ViewBag.EventFullUrl = currentEvent.EventFullUrl;
 
             _eventSummaryViewModel.eventt = currentEvent;
-            _eventSummaryViewModel.votess = currentEvent.Votes.ToList();  
+            _eventSummaryViewModel.votess = currentEvent.Votes.ToList();
+
+            _eventSummaryViewModel.vote1Count = c.VoteOptions.Count(vo => vo.VoteValue == currentEvent.EventTime1.ToString());
+            _eventSummaryViewModel.vote2Count = c.VoteOptions.Count(vo => vo.VoteValue == currentEvent.EventTime2.ToString());
+            _eventSummaryViewModel.vote3Count = c.VoteOptions.Count(vo => vo.VoteValue == currentEvent.EventTime3.ToString());
 
             return View(_eventSummaryViewModel);
         }

@@ -2,6 +2,7 @@
 using CodeRollProject.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
 namespace CodeRollProject.PresentationLayer.Controllers
@@ -26,9 +27,9 @@ namespace CodeRollProject.PresentationLayer.Controllers
 			return View(last5event);
 		}
 
-		public IActionResult DeleteEvent(int eventId)
-		{
-			Event eventt = em.TGetEventById(eventId);
+		public IActionResult DeleteEvent(int id)
+        {
+			Event eventt = em.TGetEventById(id);
 			em.TDelete(eventt);
 			return RedirectToAction("Index");
 		}

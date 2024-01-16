@@ -265,7 +265,7 @@ main{
 
     .list{
         list-style: none;
-        
+
 
         .listItem{
             display: flex;
@@ -286,8 +286,14 @@ main{
         }
         .listItem i{
             margin-right: 5px;
-        }
+        }        
     }
+
+
+}
+
+.listD {
+    padding: 0;
 }
 
 /*create page*/
@@ -389,6 +395,74 @@ main{
         /* color: #141E46; */
     }
 }
+
+
+.card-list{
+    width: 100%;
+    align-items: start;
+
+    .list{
+        list-style: none;
+
+
+        .listItem{
+            display: flex;
+            margin-bottom: 20px;
+            font-size: 20px;
+            width: 300px;
+            align-items: center;
+            justify-content: start;
+            height: 30px;
+            border-radius: 8px;
+            padding-left: 10px;
+            a{
+                text-decoration: none;
+                color: #141E46;
+
+            }
+            button{
+                background-color: #141E46;
+                outline: none;
+                border: none;
+                border-radius: 8px;
+                color: #FFF5E0;
+                padding: 5px;
+                margin-left: 10px;
+            }
+            button:hover{
+                background-color: red;
+                color: #141E46;
+
+            }
+        }
+        .listItem:hover{
+            cursor: default;
+            background-color: #141E46;
+            a{
+                color: #FFF5E0;
+            }
+            transition: 0.5s;
+        }
+        .listItem i{
+            margin-right: 5px;
+        }
+    }
+}
+
+.deletee {
+    margin-left: 15px;
+    /* background-color: red; */
+    padding: 3px;
+    border-radius: 5px;
+    i{
+         color:red;
+         margin-right:0;
+     }
+    i:hover{
+        color:white;
+    }
+}
+
 
 /*summary page*/
 

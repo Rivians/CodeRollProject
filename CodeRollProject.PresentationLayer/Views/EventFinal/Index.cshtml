@@ -11,6 +11,7 @@
             <div class="card-header">Choose Time</div>
             <div class="card-buttonS">
                 <form asp-action="Index" asp-controller="EventFinal" method="post" id="my-form">
+                    <input type="hidden" name="postedEventId" value="@Model.eventt.EventID" />
                     <lable>Name : </lable>
                     <input type="text" asp-for="participantName" />
                     <br />

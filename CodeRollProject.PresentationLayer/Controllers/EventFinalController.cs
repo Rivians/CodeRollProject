@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace CodeRollProject.PresentationLayer.Controllers
 {
+    [AllowAnonymous]
     [Authorize]
     public class EventFinalController : Controller
     {
@@ -48,11 +49,7 @@ namespace CodeRollProject.PresentationLayer.Controllers
         [HttpPost]
         public IActionResult Index(EventVoteViewModel _eventVoteViewModel)  
         {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var user = um.TGetUserByEmail(userEmail);
-
-            var data = TempData["EventData"].ToString();
-            var currentEvent = System.Text.Json.JsonSerializer.Deserialize<Event>(data);
+            var currentEvent = em.TGetEventById(_eventVoteViewModel.postedEventId);
 
             if(_eventVoteViewModel.participantName != null && _eventVoteViewModel.SelectedOption != null)
             {
